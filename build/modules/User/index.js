@@ -1,0 +1,25 @@
+"use strict";
+// import router from "./router.js";
+// import UserController from "./controller.js";
+// import User from "./model.js";
+// const models = { User };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.UserDao = exports.userRouter = void 0;
+// const controller = new UserController(models);
+// const routes = router(controller);
+const libs_1 = require("../../libs");
+const dao_1 = __importDefault(require("./dao"));
+exports.UserDao = dao_1.default;
+const repository_1 = __importDefault(require("./repository"));
+const service_1 = __importDefault(require("./service"));
+const controller_1 = __importDefault(require("./controller"));
+const router_1 = __importDefault(require("./router"));
+const userRepository = new repository_1.default(dao_1.default);
+const userService = new service_1.default(userRepository, libs_1.mailerService);
+const userController = new controller_1.default(userService, libs_1.jwtService);
+const userRouter = new router_1.default(userController);
+exports.userRouter = userRouter;
+exports.default = routes;

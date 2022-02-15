@@ -1,6 +1,8 @@
 import bcrypt from "bcrypt";
 
 class UserRepository {
+	public userDAO: any;
+
   constructor(userDao) {
     this.userDAO = userDao;
   }

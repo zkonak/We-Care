@@ -1,4 +1,8 @@
 class ConsultationRepository {
+	public consultationDao: any;
+	public ConsultationDao: any;
+	public consultationEntity: any;
+
   constructor(consultationDao) {
     this.consultationDao = consultationDao;
   }

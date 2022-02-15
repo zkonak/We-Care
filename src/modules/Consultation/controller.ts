@@ -1,6 +1,7 @@
 import ApiError from "../../helpers/ApiError.js";
 
 class ConsultationController {
+	public consultationService: any;
   //   #models;
   constructor(consultationService) {
     // this.#models = models;

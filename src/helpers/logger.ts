@@ -1,4 +1,7 @@
 class Logger {
+	public logger: any;
+	public stream: any;
+
   constructor(winston) {
     this.logger = winston.createLogger({
       format: winston.format.json(),

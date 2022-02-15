@@ -1,6 +1,8 @@
 import { Router } from "express";
 
 class ConsultationRouter {
+	public router: any;
+
   constructor(controller) {
     this.router = Router();
     this.initializeRoutes(controller);

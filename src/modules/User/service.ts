@@ -1,7 +1,10 @@
 import UserDTO from "./dto";
-import { ApiError } from "../../helpers/error";
+import  ApiError  from "../../helpers/ApiError";
 
 class UserService {
+	public userRepo: any;
+	public mailerService: any;
+
   constructor(userRepository, mailerService) {
     this.userRepo = userRepository;
     this.mailerService = mailerService;

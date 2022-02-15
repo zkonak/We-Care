@@ -2,6 +2,9 @@ import ConsultationDTO from "./dto";
 import { ApiError } from "../../helpers/ApiError";
 
 class ConsultationService {
+	public consultationRepository: any;
+	public consultationService: any;
+
   constructor(consultationRepository) {
     this.consultationRepository = consultationRepository;
   }

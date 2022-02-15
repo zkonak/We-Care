@@ -2,6 +2,9 @@ import ApiError from "../../helpers/ApiError.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 class UserController {
+	public userService: any;
+	public jwtService: any;
+	public secret: any;
   //#models;
   // constructor(models) {
   //   this.#models = models;

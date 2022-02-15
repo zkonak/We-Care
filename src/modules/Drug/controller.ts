@@ -27,13 +27,13 @@ class DrugController {
     } catch (err) {
       next(err);
     }
-  };
+  }
 
 
 
   getOne = async (req, res, next) => {
     const id = req.body.id;
-    const drug = await this.drugService.findOne({
+    /*const drug = await this.drugService.findOne({
       try {
         const drug = await this.drugService.add({ ...req.body });
         res.status(201).json(drug);
@@ -45,11 +45,13 @@ class DrugController {
     // }
 
      res.status(201).json(drug);
-  };
+     */
+  }
 
   update = async (req, res, next, id, data) => {
-    const drugFound = await this.drugService.findOne({
-      try {
+    
+    /*const drugFound = await this.drugService.findOne({
+     
         const drug = await this.drugService.add({ ...req.body });
         res.status(201).json(drug);
       } catch (err) {
@@ -64,11 +66,11 @@ class DrugController {
     // await drugFound.update(data);
     res.status(201).json(drug);
     }
-
+*/
   };
 
   delete = async (req, res, next, id, data) => {
-    const drugFound = await this.drugService.findOne({
+   /* const drugFound = await this.drugService.findOne({
       try {
         const drug = await this.drugService.add({ ...req.body });
         res.status(201).json(drug);
@@ -85,7 +87,9 @@ class DrugController {
 
     res.status(201).json(drugFound);
   };
+  */
 }
+  }
 
 export default DrugController;
 //recupère et envoie les requêtes
