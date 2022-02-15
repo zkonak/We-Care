@@ -1,8 +1,8 @@
-import pkg from 'sequelize';
+import pkg from "sequelize";
 const { Model, DataTypes } = pkg;
 import db from "../../config/db.js";
 
-class Consultation extends Model {
+class ConsultationDao extends Model {
   static init(sequelize) {
     return super.init(
       {
@@ -23,4 +23,4 @@ class Consultation extends Model {
 
 Consultation.init(db.sequelize);
 
-export default Consultation;
+export default ConsultationDao;

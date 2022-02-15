@@ -1,7 +1,6 @@
-import pkg from 'sequelize';
+import pkg from "sequelize";
 const { Model, DataTypes } = pkg;
 import db from "../../config/db.js";
-
 
 class User extends Model {
   static init(sequelize) {

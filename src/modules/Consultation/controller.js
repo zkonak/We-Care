@@ -1,73 +1,78 @@
 import ApiError from "../../helpers/ApiError.js";
 
 class ConsultationController {
-  #models;
-  constructor(models) {
-    this.#models = models;
+  //   #models;
+  constructor(consultationService) {
+    // this.#models = models;
+    this.consultationService = consultationService;
   }
 
-
-  add= async (req, res, next) => {
+  add = async (req, res, next) => {
     try {
-        const consultation = await this.#models.Consultation.create({ ...req.body });
-        res.status(201).json(consultation);
+      const consultation = await this.consultationService.create({
+        ...req.body,
+      });
+      res.status(201).json(consultation);
     } catch (err) {
-        next(err);
+      next(err);
     }
+  };
+
+  getOne = async (req, res, next) => {
+    try {
+      const consultation = await this.consultationService.findOne({
+        consultation,
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  update = async (req, res, next, id, data) => {
+    //  const consultationFound = await this.consultationService.findOne({
+    //   where: { id },
+    try {
+      const consultationFound = await this.consultationService.update({
+        ...req.body,
+      });
+    } catch (error) {
+      next(error);
+    }
+
+    //});
+    // if (!consultationFound) {
+    //   throw new ApiError("Ressource not exists");
+    // }
+
+    //await consultationFound.update(data);
+
+    // const consultation = await this.consultationService.findOne({
+    //   where: {
+    //     id,
+    //   },
+    //   attributes: { exclude: ["dateCreated"] },
+    // });
+
+    // res.status(201).json(consultation);
+  };
+
+  delete = async (req, res, next, id, data) => {
+    //     const consultationFound = await this.consultationService.findOne({
+    //       where: { id },
+    //     });
+    //     if (!consultationFound) {
+    //       throw new ApiError("Ressource not exists");
+    //     }
+    //     await consultationFound.delete();
+    //     res.status(201).json(consultationFound);
+    try {
+      const consultationDelete = await this.consultationService.delete({
+        ...req.body,
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
-
-getOne= async (req, res, next) => {
-    const id=req.body.id;
-    const consultation = await this.#models.Consultation.findAll({
-         where: {
-             id
-         },
-         attributes: { exclude: ["createdAt", "updatedAt"] },
-       
-     });
-     if (!consultation) {
-         throw new ApiError("Ressource not exists");
-     }
-
-     res.status(201).json(consultation);
- }
-
- update= async (req, res, next,id, data) => {
-    const consultationFound = await this.#models.Consultation.findOne({
-      where: { id },
-    });
-    if (!consultationFound) {
-      throw new ApiError("Ressource not exists");
-    }
-   
-    await consultationFound.update(data);
-
-    const consultation = await this.#models.Consultation.findOne({
-      where: {
-        id
-      },
-      attributes: {exclude: ["dateCreated"]},
-    }); 
-
-    res.status(201).json(consultation);
-  }
-   
-  delete= async (req, res, next,id, data) => {
-    const consultationFound = await this.#models.Consultation.findOne({
-      where: { id },
-    });
-    if (!consultationFound) {
-      throw new ApiError("Ressource not exists");
-    }
-   
-    await consultationFound.delete();
-
-    res.status(201).json(consultationFound);
-}
-  }
-
-
-
-
 
 export default ConsultationController;
