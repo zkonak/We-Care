@@ -1,10 +1,6 @@
 import ApiError from "../../helpers/ApiError.js";
 
 class DrugController {
-  // #models;
-  // constructor(models) {
-  //   this.#models = models;
-  // }
 
   constructor(drugService) {
     this.drugService = drugService;

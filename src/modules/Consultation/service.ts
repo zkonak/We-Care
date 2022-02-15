@@ -1,17 +1,24 @@
-import ConsultationDTO from "./dto";
+import ConsultationDtO from "./dto";
 import { ApiError } from "../../helpers/ApiError";
+import { IConsultationRepository } from './repository';
+
+
+export interface IConsultationService{
+    getAll():Promise<ConsultationDtO[]>
+    getOne():Promise<ConsultationDtO>
+    add(consultationData:ConsultationDto):Promise<ConsultationDtO>
+
+
+}
 
 class ConsultationService {
-	public consultationRepository: any;
-	public consultationService: any;
-
-  constructor(consultationRepository) {
+  constructor(consultationRepository:IConsultationRepositort) {
     this.consultationRepository = consultationRepository;
   }
   async getAll() {
     const consultations = await this.consultationRepository.findAll();
     return consultations.map((consultation) => {
-      new ConsultationDTO(consultation);
+      new ConsultationDtO(consultation);
     });
   }
   getOne = async (req, res, next) => {
@@ -27,17 +34,17 @@ class ConsultationService {
       throw new ApiError("Ressource not exists");
     }
 
-    res.status(201).json(consultation);
+    return new ConsultationDtO (consultation);
   };
 
-  async add(consultationData) {
+  async add(consultationData:ConsultationDto) {
     if (!consultationData) {
       throw new ApiError(400, "consultation validation failed");
     }
     const consultation = await this.consultationRepository.addNew(
       consultationData
     );
-    return new ConsultationDTO(consultation);
+    return new ConsultationDtO(consultation);
   }
   update = async (req, res, next, id, data) => {
     const consultationFound = await this.consultationRepository.findOne({
@@ -49,24 +56,24 @@ class ConsultationService {
 
     await consultationFound.update(data);
 
-    const consultation = await this.consultationService.findOne({
+    const consultation = await this.consultationRepository.findOne({
       where: {
         id,
       },
       attributes: { exclude: ["dateCreated"] },
     });
 
-    res.status(201).json(consultation);
+    return new ConsultationDtO(consultation);
   };
   delete = async (req, res, next, id, data) => {
-    const consultationFound = await this.consultationService.findOne({
+    const consultationFound = await this.consultationRepository.findOne({
       where: { id },
     });
     if (!consultationFound) {
       throw new ApiError("Ressource not exists");
     }
     await consultationFound.delete();
-    res.status(201).json(consultationFound);
+    return new ConsultationDtO;
   };
 }
 
