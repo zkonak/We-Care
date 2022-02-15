@@ -1,11 +1,16 @@
 import { Router } from "express";
 
-export default (controller) => {
-  const router = Router();
+class ConsultationRouter {
+  constructor(controller) {
+    this.router = Router();
+    this.initializeRoutes(controller);
+    return this.router;
+  }
 
-  router.route("/").post(controller.add);
-  router.route("/").get(controller.getOne);
-  router.route("/").patch(controller.update);
-  router.route("/").delete(controller.delete);
-  return router;
-};
+  initializeRoutes(controller) {
+    this.router
+      .route("/")
+      .get(auth.isAuth, controller.getAll)
+      .post(auth.isAuth, csrf, controller.add);
+  }
+}
