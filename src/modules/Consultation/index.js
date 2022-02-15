@@ -1,18 +1,13 @@
-// import router from "./router.js";
-// import ConsultationController from "./controller.js";
-// import Consultation from "./model.js";
-// const models = { Consultation };
+import ConsultationController from "./controller";
+import ConsultationRepository from "./repository";
+import ConsultationService from "./service";
+import ConsultationRouter from "./router";
 
-// const controller = new ConsultationController(models);
-// const routes = router(controller);
-
-// export default routes;
-import ConsultaionRepository from "./repository";
-const consultationRepository = new ConsultaionRepository(consultationDao);
+const consultationRepository = new ConsultationRepository(consultationDao);
 const consultationService = new ConsultationService(consultationService);
-const consultationController = new UserController(userService, jwtService);
-const consultationRouter = new UserRouter(userController);
+const consultationController = new ConsultationController(consultationService);
+const consultationRouter = new ConsultationRouter(consultationController);
 
-export { userRouter, UserDao };
+export { consultationRouter, ConcsultationDao };
 
 export default routes;
