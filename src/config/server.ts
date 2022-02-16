@@ -1,30 +1,39 @@
-class Server {
-  #http;
-  constructor(http) {
-    this.#http = http;
-  }
+import { Response } from 'express';
+import { Request } from 'express';
 
-  middlewares(middlewares) {
-    for (const key in middlewares) {
-      this.#http.use(middlewares[key]);
+import { Server } from '@overnightjs/core';
+import {handleError} from '../helpers/ApiError'
+
+class App extends Server {
+
+    constructor(routes: Array<Object>, middlewares: Object) {
+      
+        super();
+
+        this.initializeMiddlewares(middlewares);
+        super.addControllers(routes);
+        this.initializeErrorHandler();
     }
-  }
 
-  routes(routes) {
-    for (const path in routes) {
-      this.#http.use(path, routes[path]);
+    initializeMiddlewares(middlewares: any) {
+        for (const key in middlewares) {
+            if (key === 'csrf') {
+                this.app.get('/csrf', middlewares[key], (req: Request | any, res: Response) => {
+                    res.status(200).json(req.csrfToken());
+                })
+            }
+            else
+                this.app.use(middlewares[key]);
+        }
     }
-  }
 
-  errorHandler(errorHandler) {
-    this.#http.use(errorHandler);
-  }
+    initializeErrorHandler() {
+        this.app.use(handleError);
+    }
 
-  start(port) {
-    this.#http.listen(port, () => {
-      console.log("server started " + port);
-    });
-  }
+    listen(port: any) {
+        this.app.listen(port, async () => console.log(`application started on port : ${port}`));
+    }
 }
 
-export default Server;
+export default App;

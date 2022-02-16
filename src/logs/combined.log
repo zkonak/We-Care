@@ -14,3 +14,13 @@
 {"level":"info","message":"::1 - - [22/Dec/2021:10:27:39 +0000] \"POST /user/login HTTP/1.1\" 500 51 \"-\" \"PostmanRuntime/7.28.4\"\n"}
 {"level":"info","message":"::1 - - [22/Dec/2021:10:39:12 +0000] \"POST /user/login HTTP/1.1\" 500 42 \"-\" \"PostmanRuntime/7.28.4\"\n"}
 {"level":"info","message":"::1 - - [22/Dec/2021:10:41:49 +0000] \"POST /user/login HTTP/1.1\" 200 217 \"-\" \"PostmanRuntime/7.28.4\"\n"}
+{"level":"error"}
+{"level":"info","message":"::1 - - [16/Feb/2022:13:31:53 +0000] \"GET /user HTTP/1.1\" 404 143 \"-\" \"PostmanRuntime/7.28.4\"\n"}
+{"level":"info","message":"::1 - - [16/Feb/2022:13:32:23 +0000] \"GET /users HTTP/1.1\" 401 37 \"-\" \"PostmanRuntime/7.28.4\"\n"}
+{"level":"warn","message":"Error: Missing required email and password fields\n    at UserService.<anonymous> (/Users/zelihaozsiray/Desktop/formation/projets/We-Care/src/modules/User/service.ts:38:13)\n    at Generator.next (<anonymous>)\n    at /Users/zelihaozsiray/Desktop/formation/projets/We-Care/src/modules/User/service.ts:8:71\n    at new Promise (<anonymous>)\n    at __awaiter (/Users/zelihaozsiray/Desktop/formation/projets/We-Care/src/modules/User/service.ts:4:12)\n    at UserService.register (/Users/zelihaozsiray/Desktop/formation/projets/We-Care/src/modules/User/service.ts:29:16)\n    at UserController.<anonymous> (/Users/zelihaozsiray/Desktop/formation/projets/We-Care/src/modules/User/controller.ts:56:43)\n    at Generator.next (<anonymous>)\n    at /Users/zelihaozsiray/Desktop/formation/projets/We-Care/src/modules/User/controller.ts:17:71\n    at new Promise (<anonymous>)"}
+{"level":"info","message":"::1 - - [16/Feb/2022:13:33:22 +0000] \"POST /users HTTP/1.1\" 400 73 \"-\" \"PostmanRuntime/7.28.4\"\n"}
+{"level":"info","message":"::1 - - [16/Feb/2022:13:33:42 +0000] \"POST /users HTTP/1.1\" 201 122 \"-\" \"PostmanRuntime/7.28.4\"\n"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}

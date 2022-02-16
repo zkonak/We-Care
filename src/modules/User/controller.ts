@@ -1,6 +1,12 @@
-import ApiError from "../../helpers/ApiError.js";
+
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import JwtService from "../../libs/jwt";
+import { Controller, Middleware, Get, Post, Put, Delete } from '@overnightjs/core'
+import { Response, Request, NextFunction } from "express";
+import { IUserService } from "./service";
+import { auth } from "../../middlewares";
+@Controller('users')
 class UserController {
 	public userService: any;
 	public jwtService: any;
@@ -10,14 +16,15 @@ class UserController {
   //   this.#models = models;
   //   this.secret = "aa";
   // }
-  constructor(userService, jwtService) {
+  constructor(userService:IUserService, jwtService:JwtService) {
     this.userService = userService;
     this.jwtService = jwtService;
   }
-  compareHash = async (password, hash) =>
+  compareHash = async (password:any, hash:any) =>
     await bcrypt.compareSync(password, hash);
-
-  login = async (req, res, next) => {
+  
+    @Post('login')
+  login = async (req:Request, res:Response, next:NextFunction) => {
     try {
       //const newPatient = await this.#models.Patient.findOne();
       //   const userData = req.body;
@@ -31,7 +38,7 @@ class UserController {
       //    throw new ApiError(400, 'User password do not match');
       const user = await this.userService.login({ ...req.body });
       const token = await jwt.sign({ id: user.id }, this.secret);
-      res.cookie("auth-cookie", token, { expiresIn: "30d" });
+      res.cookie('auth-cookie', token, {expires: new Date(Date.now() + (30 * 86400 * 1000))});
 
       res.status(200).json(user);
     } catch (error) {
@@ -39,8 +46,8 @@ class UserController {
       next(error);
     }
   };
-
-  add = async (req, res, next) => {
+  @Post()
+  add = async (req:Request, res:Response, next:NextFunction) => {
     try {
       // const salt = bcrypt.genSaltSync(10);
       // const userData = req.body;
@@ -53,15 +60,16 @@ class UserController {
     }
   };
 
-  async findByEmail(userEntity) {
+  async findByEmail(userEntity:any) {
     // return await this.#models.User.findOne({
     //   where: { email: userEntity.email },
     // });
-    return await this.userService.findByEmail({ ...req.body });
+    return await this.userService.findByEmail(userEntity);
     //res.status(201).json(user);
   }
-
-  getOne = async (req, res, next) => {
+  @Get()
+  @Middleware(auth.isAuth)
+  getOne = async (req:Request, res:Response, next:NextFunction) => {
     try {
       const user = await this.userService.getOne({ ...req.body });
 
@@ -70,8 +78,8 @@ class UserController {
       next(err);
     }
   };
-
-  update = async (req, res, next) => {
+  @Put()
+  update = async (req:Request, res:Response, next:NextFunction) => {
     try {
       const user = await this.userService.update({ ...req.body });
 
@@ -80,8 +88,8 @@ class UserController {
       next(err);
     }
   };
-
-  delete = async (req, res, next) => {
+  @Delete()
+  delete = async (req:Request, res:Response, next:NextFunction) => {
     try {
       const user = await this.userService.delete({ ...req.body });
 

@@ -1,23 +1,13 @@
-// import router from "./router.js";
-// import UserController from "./controller.js";
-// import User from "./model.js";
-// const models = { User };
+import {getCustomRepository} from "typeorm";
+import UserRepository from './repository';
+import UserService from './service';
+import UserController from './controller';
+import UserRouter from './router';
+import {jwtService, mailerService} from '../../libs';
 
-// const controller = new UserController(models);
-// const routes = router(controller);
-
-import { jwtService, mailerService } from "../../libs";
-import UserDao from "./dao";
-import UserRepository from "./repository";
-import UserService from "./service";
-import UserController from "./controller";
-import UserRouter from "./router";
-
-const userRepository = new UserRepository(UserDao);
+const userRepository = getCustomRepository(UserRepository);
 const userService = new UserService(userRepository, mailerService);
 const userController = new UserController(userService, jwtService);
-const userRouter = new UserRouter(userController);
+// const userRouter = UserRouter(userController);
 
-export { userRouter, UserDao };
-
-export default routes;
+export {userController};

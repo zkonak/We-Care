@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const dto_1 = __importDefault(require("./dto"));
-const error_1 = require("../../helpers/error");
+const ApiError_1 = require("../../helpers/ApiError");
 class UserService {
     constructor(userRepository, mailerService) {
         this.userRepo = userRepository;
@@ -28,7 +28,7 @@ class UserService {
     register(userData) {
         return __awaiter(this, void 0, void 0, function* () {
             if (!userData.email || !userData.password)
-                throw new error_1.ApiError(400, "Missing required email and password fields");
+                throw new ApiError_1.ApiError(400, "Missing required email and password fields");
             const newUser = yield this.userRepo.addNew(userData);
             yield this.mailerService.sendMail(userData);
             return new dto_1.default(newUser);
@@ -37,13 +37,13 @@ class UserService {
     login(userData) {
         return __awaiter(this, void 0, void 0, function* () {
             if (!userData.email || !userData.password)
-                throw new error_1.ApiError(400, "Missing required email and password fields");
+                throw new ApiError_1.ApiError(400, "Missing required email and password fields");
             const user = yield this.userRepo.findByEmail(userData);
             if (!user)
-                throw new error_1.ApiError(400, "User with the specified email does not exists");
+                throw new ApiError_1.ApiError(400, "User with the specified email does not exists");
             const passwordMatch = yield this.userRepo.compareHash(userData.password, user.password);
             if (!passwordMatch)
-                throw new error_1.ApiError(400, "User password do not match");
+                throw new ApiError_1.ApiError(400, "User password do not match");
             return new dto_1.default(user);
         });
     }
@@ -54,14 +54,14 @@ class UserService {
     }
     findById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.userRepo.findOne(new dto_1.default({ id: id }));
+            return yield this.userRepo.findOne(id);
         });
     }
     getOne(userData) {
         return __awaiter(this, void 0, void 0, function* () {
             const user = yield this.userRepo.findOne(userData);
             if (!user) {
-                throw new error_1.ApiError("Ressource not exists");
+                //throw new ApiError("Ressource not exists");
             }
             return new dto_1.default(user);
         });

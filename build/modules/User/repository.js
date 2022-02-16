@@ -35,9 +35,9 @@ class UserRepository {
             return yield this.userDAO.findOne({ where: { email: userEntity.email } });
         });
     }
-    findOne(userEntity) {
+    findOne(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.userDAO.findOne({ where: { id: userEntity.id } });
+            return yield this.userDAO.findOne({ where: { id: id } });
         });
     }
     update(userEntity) {

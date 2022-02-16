@@ -1,13 +1,16 @@
-
 import { Router } from "express";
+//import { auth } from "../../middlewares";
+import UserController from "./controller";
 
-export default (controller) => {
-  const router = Router();
+export default ((controller: UserController) => {
+    const userRouter = Router();
 
-  router.route("/").post(controller.add);
-  router.route("/").get(controller.getOne);
-  router.route("/login").post(controller.login);
-  router.route("/").patch(controller.update);
+    userRouter
+        .route('/')
+        .get(controller.getOne)
+        .post(controller.add);
 
-  return router;
-};
+    userRouter.route(`/auth`).post(controller.login);
+
+    return userRouter;
+});
