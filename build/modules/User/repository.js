@@ -1,4 +1,13 @@
 "use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -12,43 +21,49 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const typeorm_1 = require("typeorm");
 const bcrypt_1 = __importDefault(require("bcrypt"));
-class UserRepository {
-    constructor(userDao) {
+const entity_1 = require("./entity");
+let UserRepository = class UserRepository {
+    constructor(manager) {
+        this.manager = manager;
         this.compareHash = (password, hash) => __awaiter(this, void 0, void 0, function* () { return yield bcrypt_1.default.compareSync(password, hash); });
-        this.userDAO = userDao;
     }
     findAll() {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.userDAO.findAll({ include: "Service" });
+            return yield this.manager.find(entity_1.User);
         });
     }
     addNew(userEntity) {
         return __awaiter(this, void 0, void 0, function* () {
             const salt = bcrypt_1.default.genSaltSync(10);
             userEntity.password = bcrypt_1.default.hashSync(userEntity.password, salt);
-            return yield this.userDAO.create(userEntity);
+            return yield this.manager.save(entity_1.User, userEntity);
         });
     }
     findByEmail(userEntity) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.userDAO.findOne({ where: { email: userEntity.email } });
+            return yield this.manager.findOne(entity_1.User, { where: { email: userEntity.email } });
         });
     }
     findOne(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.userDAO.findOne({ where: { id: id } });
+            return yield this.manager.findOne(entity_1.User, { where: { id: id } });
         });
     }
     update(userEntity) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.userDAO.update(userEntity);
+            //return await this.manager.update(User,userEntity);
         });
     }
     delete(userEntity) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.userDAO.delete(userEntity);
+            //return await this.manager.delete(userEntity);
         });
     }
-}
+};
+UserRepository = __decorate([
+    (0, typeorm_1.EntityRepository)(),
+    __metadata("design:paramtypes", [typeorm_1.EntityManager])
+], UserRepository);
 exports.default = UserRepository;

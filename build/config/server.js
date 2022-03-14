@@ -13,7 +13,6 @@ const core_1 = require("@overnightjs/core");
 const ApiError_1 = require("../helpers/ApiError");
 class App extends core_1.Server {
     constructor(routes, middlewares) {
-        console.log("QQQQQ");
         super();
         this.initializeMiddlewares(middlewares);
         super.addControllers(routes);

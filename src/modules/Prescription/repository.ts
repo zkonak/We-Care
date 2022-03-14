@@ -3,11 +3,6 @@ import bcrypt from 'bcrypt';
 import { User } from "./entity";
 
 
-
-
-
-
-
 export interface IUserRepository {
   findAll() : Promise<User[]>
   addNew(userEntity: any) : Promise<any>
@@ -17,10 +12,7 @@ export interface IUserRepository {
 
 @EntityRepository()
 class UserRepository implements IUserRepository {
-
-  
-
-  constructor(private manager: EntityManager) {
+constructor(private manager: EntityManager) {
   }
 
   async findAll() {

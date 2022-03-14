@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, BaseEntity } from "t
 
 
 @Entity()
-export class User extends BaseEntity {
+export class Doctor extends BaseEntity {
 
     @PrimaryGeneratedColumn()
     id: number;
@@ -13,7 +13,4 @@ export class User extends BaseEntity {
     @Column()
     password: string;
 
-
-    /*@ManyToOne(() => Book, book => book.users)
-    book: Book$*/
 }

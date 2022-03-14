@@ -17,11 +17,15 @@
 
 // export default routes;
 
-import {userController} from './User';
+import {patientController} from './Patient';
+import {serviceController} from './Service';
+import {doctorController} from './Doctor';
 
 
 const routes = [
-    userController,
+    patientController,
+    serviceController,
+    doctorController
   
 ]
 

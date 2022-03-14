@@ -27,25 +27,10 @@ const jwt_1 = __importDefault(require("../../libs/jwt"));
 const core_1 = require("@overnightjs/core");
 const middlewares_1 = require("../../middlewares");
 let UserController = class UserController {
-    //#models;
-    // constructor(models) {
-    //   this.#models = models;
-    //   this.secret = "aa";
-    // }
     constructor(userService, jwtService) {
         this.compareHash = (password, hash) => __awaiter(this, void 0, void 0, function* () { return yield bcrypt_1.default.compareSync(password, hash); });
         this.login = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             try {
-                //const newPatient = await this.#models.Patient.findOne();
-                //   const userData = req.body;
-                //   if (!userData.email || !userData.password)
-                //     throw new ApiError(400, 'Missing required email and password fields');
-                //   const user = await this.findByEmail(userData)
-                //   if (!user)
-                //    throw new ApiError(400, 'User with the specified email does not exists');
-                //  const passwordMatch = await this.compareHash(userData.password, user.password);
-                //  if (!passwordMatch)
-                //    throw new ApiError(400, 'User password do not match');
                 const user = yield this.userService.login(Object.assign({}, req.body));
                 const token = yield jsonwebtoken_1.default.sign({ id: user.id }, this.secret);
                 res.cookie('auth-cookie', token, { expires: new Date(Date.now() + (30 * 86400 * 1000)) });

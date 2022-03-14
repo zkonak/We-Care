@@ -7,7 +7,7 @@ const env = {
   db_user: process.env.DB_USER,
   db_host: process.env.DB_HOST,
   db_password: process.env.DB_PASSWORD,
-  jwt_secret: process.env.JWT_SECRET,
+  jwt_secret: process.env.JWT_SECRET || "blabla"
 };
 
 export default env;

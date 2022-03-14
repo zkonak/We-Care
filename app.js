@@ -31,18 +31,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const server_1 = __importDefault(require("./src/config/server"));
-const env_1 = __importDefault(require("./src/config/env"));
-const modules_1 = __importDefault(require("./src/modules"));
-const middlewares_1 = __importStar(require("./src/middlewares"));
-const database_1 = __importDefault(require("./src/config/database"));
-
+const server_1 = __importDefault(require("./config/server"));
+const env_1 = __importDefault(require("./config/env"));
+const database_1 = __importDefault(require("./config/database"));
+const modules_1 = __importDefault(require("./modules"));
+const middlewares_1 = __importStar(require("./middlewares"));
+const application = new server_1.default(modules_1.default, middlewares_1.default);
 (() => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        console.log("aa");
         yield database_1.default.connect();
-        console.log("bb");
-        const application = new server_1.default(modules_1.default, middlewares_1.default);
         application.listen(env_1.default.app_port);
     }
     catch (e) {

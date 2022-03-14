@@ -11,11 +11,7 @@ class UserController {
 	public userService: any;
 	public jwtService: any;
 	public secret: any;
-  //#models;
-  // constructor(models) {
-  //   this.#models = models;
-  //   this.secret = "aa";
-  // }
+  
   constructor(userService:IUserService, jwtService:JwtService) {
     this.userService = userService;
     this.jwtService = jwtService;
@@ -26,16 +22,7 @@ class UserController {
     @Post('login')
   login = async (req:Request, res:Response, next:NextFunction) => {
     try {
-      //const newPatient = await this.#models.Patient.findOne();
-      //   const userData = req.body;
-      //   if (!userData.email || !userData.password)
-      //     throw new ApiError(400, 'Missing required email and password fields');
-      //   const user = await this.findByEmail(userData)
-      //   if (!user)
-      //    throw new ApiError(400, 'User with the specified email does not exists');
-      //  const passwordMatch = await this.compareHash(userData.password, user.password);
-      //  if (!passwordMatch)
-      //    throw new ApiError(400, 'User password do not match');
+     
       const user = await this.userService.login({ ...req.body });
       const token = await jwt.sign({ id: user.id }, this.secret);
       res.cookie('auth-cookie', token, {expires: new Date(Date.now() + (30 * 86400 * 1000))});
