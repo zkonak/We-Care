@@ -4,7 +4,7 @@ import ConsultationService from "./service";
 import { IConsultationService } from "./service";
 @Controller("consultations")
 class ConsultationController {
-  private consultationService;
+  private consultationService: any;
   constructor(ConsultationService: IConsultationService) {
     this.consultationService = this.consultationService;
   }

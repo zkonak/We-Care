@@ -12,17 +12,23 @@
 //   "/prescription": PrescriptionRouter,
 //   "/consultation": ConsultationRouter,
 //   "/service": ServiceRouter
- 
+
 // };
 
 // export default routes;
 
-import {userController} from './User';
-
+import { patientController } from "./Patient";
+import { serviceController } from "./Service";
+import { doctorController } from "./Doctor";
+import { prescriptionController } from "./Prescription";
+import { consultationController } from "./Consultation";
 
 const routes = [
-    userController,
-  
-]
+  patientController,
+  serviceController,
+  doctorController,
+  prescriptionController,
+  consultationController,
+];
 
 export default routes;
