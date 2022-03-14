@@ -1,33 +1,22 @@
-class ConsultationRepository {
-	public consultationDao: any;
-	public ConsultationDao: any;
-	public consultationEntity: any;
+import { EntityRepository, EntityManager } from "typeorm";
+import { Consultation } from "./entity";
+export interface IConsultationRepository {
+  findAll(): Promise<Consultation[]>;
+  addConsultation(consultation: Consultation): Promise<Consultation>;
+  findById(id: number): Promise<Consultation | undefined>;
+}
+@EntityRepository()
+class ConsultationRepository implements IConsultationRepository {
+  constructor(private manager: EntityManager) {}
 
-  constructor(consultationDao) {
-    this.consultationDao = consultationDao;
+  async findAll(): Promise<Consultation[]> {
+    return await this.manager.find(Consultation);
   }
-  async findAll() {
-    return await this.consultationDao.findAll();
+  async addConsultation(consultation: Consultation): Promise<Consultation> {
+    return await this.manager.save(consultation);
   }
-
-  async addNew(consultationEntity) {
-    return await this.ConsultationDao.create(consultationEntity);
-  }
-  async findOne(consultationEntity) {
-    return await this.consultationDao.findOne({
-      where: { id_patien: consultationEntity.id },
-    });
-  }
-  async update(consultationEntity) {
-    return await this.consultationDao.update({
-      consultationEntity,
-    });
-  }
-  async delete(consultationEntity) {
-    return await this.consultationEntity.delete({
-      consultationEntity,
-    });
+  async findById(id: number) {
+    const patient = await this.manager.findOne(Consultation, id);
+    return patient?.consultation;
   }
 }
-
-export default ConsultationRepository;

@@ -1,38 +1,46 @@
+import { EntityRepository, EntityManager } from "typeorm";
 import bcrypt from "bcrypt";
+import { User } from "./entity";
 
-class UserRepository {
-	public userDAO: any;
+export interface IUserRepository {
+  findAll(): Promise<User[]>;
+  addNew(userEntity: any): Promise<any>;
+  findByEmail(userEntity: any): Promise<User | undefined>;
+  compareHash(password: string, hash: string): Promise<boolean>;
+}
 
-  constructor(userDao) {
-    this.userDAO = userDao;
-  }
+@EntityRepository()
+class UserRepository implements IUserRepository {
+  constructor(private manager: EntityManager) {}
 
   async findAll() {
-    return await this.userDAO.findAll({ include: "Service" });
+    return await this.manager.find(User);
   }
 
-  async addNew(userEntity) {
+  async addNew(userEntity: any) {
     const salt = bcrypt.genSaltSync(10);
     userEntity.password = bcrypt.hashSync(userEntity.password, salt);
-    return await this.userDAO.create(userEntity);
+    return await this.manager.save(User, userEntity);
   }
 
-  async findByEmail(userEntity) {
-    return await this.userDAO.findOne({ where: { email: userEntity.email } });
+  async findByEmail(userEntity: any) {
+    return await this.manager.findOne(User, {
+      where: { email: userEntity.email },
+    });
   }
-  async findOne(userEntity) {
-    return await this.userDAO.findOne({ where: { id: userEntity.id } });
+  async findOne(id: any) {
+    return await this.manager.findOne(User, { where: { id: id } });
   }
 
-  compareHash = async (password, hash) =>
+  compareHash = async (password: any, hash: any) =>
     await bcrypt.compareSync(password, hash);
 
-  async update(userEntity) {
-    return await this.userDAO.update(userEntity);
+  async update(userEntity: any) {
+    //return await this.manager.update(User,userEntity);
   }
 
-  async delete(userEntity) {
-    return await this.userDAO.delete(userEntity);
+  async delete(userEntity: any) {
+    //return await this.manager.delete(userEntity);
   }
 }
 

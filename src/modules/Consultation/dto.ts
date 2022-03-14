@@ -1,9 +1,18 @@
-import ConsultationController from "./controller";
-import UserService from "../User/service";
 class ConsultationDtO {
-  Constructor({ id_patient, id_doctor, date }) {
-    const patient = UserService.findById(id_patient);
-    const doctor = UserService.findById(id_doctor);
+  id;
+
+  id_doctor;
+  patients;
+  constructor({
+    id,
+    id_doctor,
+    patients,
+  }: {
+    id: number;
+    id_doctor: number;
+    patients: Patients[];
+  }) {
+    (this.id = id), (this.id_doctor = id_doctor), (this.patients = patients);
   }
 }
 

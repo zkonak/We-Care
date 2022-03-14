@@ -1,21 +1,33 @@
 import UserDTO from "./dto";
-import  ApiError  from "../../helpers/ApiError";
+import { IUserRepository } from "./repository";
+import { ApiError } from "../../helpers/ApiError";
 
-class UserService {
-	public userRepo: any;
-	public mailerService: any;
+export interface IUserService {
+  getAll(): Promise<UserDTO[]>;
+  register(userData: any): Promise<UserDTO>;
+  login(userData: any): Promise<UserDTO>;
+  findByEmail(userData: any): Promise<UserDTO>;
+  findById(id: any): Promise<UserDTO>;
+  getOne(userData: any): Promise<UserDTO>;
+  update(userData: any): Promise<UserDTO>;
+  delete(userData: any): Promise<UserDTO>;
+}
 
-  constructor(userRepository, mailerService) {
+class UserService implements IUserService {
+  public userRepo: any;
+  public mailerService: any;
+
+  constructor(userRepository: IUserRepository, mailerService: any) {
     this.userRepo = userRepository;
     this.mailerService = mailerService;
   }
 
   async getAll() {
     const users = await this.userRepo.findAll();
-    return users.map((user) => new UserDTO(user));
+    return users.map((user: any) => new UserDTO(user));
   }
 
-  async register(userData) {
+  async register(userData: any) {
     if (!userData.email || !userData.password)
       throw new ApiError(400, "Missing required email and password fields");
 
@@ -24,7 +36,7 @@ class UserService {
     return new UserDTO(newUser);
   }
 
-  async login(userData) {
+  async login(userData: any) {
     if (!userData.email || !userData.password)
       throw new ApiError(400, "Missing required email and password fields");
 
@@ -41,28 +53,28 @@ class UserService {
     return new UserDTO(user);
   }
 
-  async findByEmail(userData) {
+  async findByEmail(userData: any) {
     return await this.userRepo.findByEmail(new UserDTO(userData));
   }
 
-  async findById(id) {
-    return await this.userRepo.findOne(new UserDTO({ id: id }));
+  async findById(id: any) {
+    return await this.userRepo.findOne(id);
   }
 
-  async getOne(userData) {
+  async getOne(userData: any): Promise<UserDTO> {
     const user = await this.userRepo.findOne(userData);
     if (!user) {
-      throw new ApiError("Ressource not exists");
+      //throw new ApiError("Ressource not exists");
     }
     return new UserDTO(user);
   }
 
-  async update(userData) {
+  async update(userData: any) {
     const user = await this.getOne(userData);
     const userUpdated = this.userRepo.update(user);
     return new UserDTO(userUpdated);
   }
-  async delete(userData) {
+  async delete(userData: any) {
     const user = await this.getOne(userData);
     const userDeleted = this.userRepo.delete(user);
     return new UserDTO(userDeleted);

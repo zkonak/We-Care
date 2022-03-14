@@ -1,63 +1,55 @@
-import ApiError from "../../helpers/ApiError.js";
-
+import { NextFunction, Request, Response } from "express";
+import { Controller, Get, Post } from "@overnightjs/core";
+import ConsultationService from "./service";
+import { IConsultationService } from "./service";
+@Controller("consultations")
 class ConsultationController {
-	public consultationService: any;
-  //   #models;
-  constructor(consultationService) {
-    // this.#models = models;
-    this.consultationService = consultationService;
+  private consultationService;
+  constructor(ConsultationService: IConsultationService) {
+    this.consultationService = this.consultationService;
   }
-
-  add = async (req, res, next) => {
+  @Post()
+  add = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const consultation = await this.consultationService.create({
- ...req.body});
+      const consultation = await this.consultationService.add({
+        ...req.body,
+      });
       res.status(201).json(consultation);
     } catch (err) {
       next(err);
     }
   };
- 
-  getAll = async (req, res, next) => {
+
+  getAll = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const consultations = await this.consultationService.findAll({
-        ...req.body ,
-      });
+      const consultations = await this.consultationService.getAll();
       res.status(201).json(consultations);
     } catch (error) {
       next(error);
     }
   };
-  getOne = async (req, res, next) => {
+  @Get(":id")
+  getOne = async (id: any, req: Request, res: Response, next: NextFunction) => {
     try {
-      const consultation = await this.consultationService.findOne({
-        ...req.body ,
-      });
+      const consultation = await this.consultationService.getOne(id);
       res.status(201).json(consultation);
     } catch (error) {
       next(error);
     }
   };
 
-  
-  update = async (req, res, next) => {
-    //  const consultationFound = await this.consultationService.findOne({
-    //   where: { id },
+  update = async (id: any, req: Request, res: Response, next: NextFunction) => {
     try {
       const consultationFound = await this.consultationService.update({
-        ...req.body,
+        id,
       });
-     res.status(201).json(consultationFound);
-
+      res.status(201).json(consultationFound);
     } catch (error) {
       next(error);
-    }    
+    }
   };
-  
 
-
-  delete = async (req, res, next) => {
-   
+  delete = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const consultationDelete = await this.consultationService.delete({
         ...req.body,
