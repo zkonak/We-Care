@@ -4,63 +4,42 @@ import jwt from "jsonwebtoken";
 import JwtService from "../../libs/jwt";
 import { Controller, Middleware, Get, Post, Put, Delete } from '@overnightjs/core'
 import { Response, Request, NextFunction } from "express";
-import { IUserService } from "./service";
+import { IPrescriptionService } from "./service";
 import { auth } from "../../middlewares";
-@Controller('users')
-class UserController {
-	public userService: any;
+@Controller('prescriptions')
+class PrescriptionController {
+	public prescriptionService: any;
 	public jwtService: any;
 	public secret: any;
   
-  constructor(userService:IUserService, jwtService:JwtService) {
-    this.userService = userService;
+  constructor(prescriptionService:IPrescriptionService, jwtService:JwtService) {
+    this.prescriptionService = prescriptionService;
     this.jwtService = jwtService;
   }
-  compareHash = async (password:any, hash:any) =>
-    await bcrypt.compareSync(password, hash);
-  
-    @Post('login')
-  login = async (req:Request, res:Response, next:NextFunction) => {
-    try {
-     
-      const user = await this.userService.login({ ...req.body });
-      const token = await jwt.sign({ id: user.id }, this.secret);
-      res.cookie('auth-cookie', token, {expires: new Date(Date.now() + (30 * 86400 * 1000))});
-
-      res.status(200).json(user);
-    } catch (error) {
-      console.log(error);
-      next(error);
-    }
-  };
+   
+   
   @Post()
   add = async (req:Request, res:Response, next:NextFunction) => {
     try {
       // const salt = bcrypt.genSaltSync(10);
-      // const userData = req.body;
-      // userData.password = bcrypt.hashSync(req.body.password, salt);
-      //const user = await this.#models.User.create({ ...userData });
-      const user = await this.userService.register({ ...req.body });
-      res.status(201).json(user);
+      // const prescriptionData = req.body;
+      // prescriptionData.password = bcrypt.hashSync(req.body.password, salt);
+      //const prescription = await this.#models.Prescription.create({ ...prescriptionData });
+      const prescription = await this.prescriptionService.register({ ...req.body });
+      res.status(201).json(prescription);
     } catch (err) {
       next(err);
     }
   };
 
-  async findByEmail(userEntity:any) {
-    // return await this.#models.User.findOne({
-    //   where: { email: userEntity.email },
-    // });
-    return await this.userService.findByEmail(userEntity);
-    //res.status(201).json(user);
-  }
+  
   @Get()
   @Middleware(auth.isAuth)
   getOne = async (req:Request, res:Response, next:NextFunction) => {
     try {
-      const user = await this.userService.getOne({ ...req.body });
+      const prescription = await this.prescriptionService.getOne({ ...req.body });
 
-      res.status(201).json(user);
+      res.status(201).json(prescription);
     } catch (err) {
       next(err);
     }
@@ -68,9 +47,9 @@ class UserController {
   @Put()
   update = async (req:Request, res:Response, next:NextFunction) => {
     try {
-      const user = await this.userService.update({ ...req.body });
+      const prescription = await this.prescriptionService.update({ ...req.body });
 
-      res.status(201).json(user);
+      res.status(201).json(prescription);
     } catch (err) {
       next(err);
     }
@@ -78,13 +57,13 @@ class UserController {
   @Delete()
   delete = async (req:Request, res:Response, next:NextFunction) => {
     try {
-      const user = await this.userService.delete({ ...req.body });
+      const prescription = await this.prescriptionService.delete({ ...req.body });
 
-      res.status(201).json(user);
+      res.status(201).json(prescription);
     } catch (err) {
       next(err);
     }
   };
 }
 
-export default UserController;
+export default PrescriptionController;

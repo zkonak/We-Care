@@ -20,12 +20,13 @@
 import {patientController} from './Patient';
 import {serviceController} from './Service';
 import {doctorController} from './Doctor';
-
+import {prescriptionController} from './Prescription';
 
 const routes = [
     patientController,
     serviceController,
-    doctorController
+    doctorController,
+    prescriptionController
   
 ]
 

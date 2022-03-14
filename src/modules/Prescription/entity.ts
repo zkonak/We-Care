@@ -2,15 +2,11 @@ import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, BaseEntity } from "t
 
 
 @Entity()
-export class User extends BaseEntity {
+export class Prescription extends BaseEntity {
 
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
-    email: string;
-
-    @Column()
-    password: string;
+  
 
 }

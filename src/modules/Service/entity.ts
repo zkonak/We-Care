@@ -1,5 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, BaseEntity } from "typeorm";
-
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, BaseEntity } from "typeorm";
+import { Doctor } from "../Doctor/entity";
 
 @Entity()
 export class Service extends BaseEntity {
@@ -9,7 +9,9 @@ export class Service extends BaseEntity {
 
     @Column()
     name: string;
-
+    
+    @OneToMany(() => Doctor, doctor => doctor.service)
+    doctors: Doctor[];
   
 
 }

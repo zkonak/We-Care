@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, BaseEntity } from "typeorm";
-
+import { Service } from "../Service/entity";
 
 @Entity()
 export class Doctor extends BaseEntity {
@@ -12,5 +12,7 @@ export class Doctor extends BaseEntity {
 
     @Column()
     password: string;
+    @ManyToOne(() => Service, service => service.doctors)
+    service: Service
 
 }

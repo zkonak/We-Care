@@ -1,13 +1,13 @@
 import {getCustomRepository} from "typeorm";
-import UserRepository from './repository';
-import UserService from './service';
-import UserController from './controller';
-import UserRouter from './router';
+import PrescriptionRepository from './repository';
+import PrescriptionService from './service';
+import PrescriptionController from './controller';
+import PrescriptionRouter from './router';
 import {jwtService, mailerService} from '../../libs';
 
-const userRepository = getCustomRepository(UserRepository);
-const userService = new UserService(userRepository, mailerService);
-const userController = new UserController(userService, jwtService);
-// const userRouter = UserRouter(userController);
+const prescriptionRepository = getCustomRepository(PrescriptionRepository);
+const prescriptionService = new PrescriptionService(prescriptionRepository, mailerService);
+const prescriptionController = new PrescriptionController(prescriptionService, jwtService);
+// const prescriptionRouter = PrescriptionRouter(prescriptionController);
 
-export {userController};
+export {prescriptionController};

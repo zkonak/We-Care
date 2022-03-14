@@ -1,90 +1,64 @@
-import UserDTO from "./dto";
-import { IUserRepository } from "./repository";
+import PrescriptionDTO from "./dto";
+import { IPrescriptionRepository } from "./repository";
 import { ApiError } from "../../helpers/ApiError";
 
 
 
 
 
-export interface IUserService {
-  getAll() : Promise<UserDTO[]>
-  register(userData: any) : Promise<UserDTO>
-  login(userData: any) : Promise<UserDTO>
-  findByEmail(userData:any):Promise<UserDTO>
-  findById(id:any):Promise<UserDTO>
-  getOne(userData:any):Promise<UserDTO>
-  update(userData:any):Promise<UserDTO>
-  delete(userData:any):Promise<UserDTO>
+export interface IPrescriptionService {
+  getAll() : Promise<PrescriptionDTO[]>
+  register(prescriptionData: any) : Promise<PrescriptionDTO>
+  
+  getOne(prescriptionData:any):Promise<PrescriptionDTO>
+  update(prescriptionData:any):Promise<PrescriptionDTO>
+  delete(prescriptionData:any):Promise<PrescriptionDTO>
 
 }
 
 
-class UserService implements IUserService {
-	public userRepo: any;
+class PrescriptionService implements IPrescriptionService {
+	public prescriptionRepo: any;
 	public mailerService: any;
 
-  constructor(userRepository:IUserRepository, mailerService:any) {
-    this.userRepo = userRepository;
+  constructor(prescriptionRepository:IPrescriptionRepository, mailerService:any) {
+    this.prescriptionRepo = prescriptionRepository;
     this.mailerService = mailerService;
   }
 
   async getAll() {
-    const users = await this.userRepo.findAll();
-    return users.map((user:any) => new UserDTO(user));
+    const prescriptions = await this.prescriptionRepo.findAll();
+    return prescriptions.map((prescription:any) => new PrescriptionDTO(prescription));
   }
 
-  async register(userData:any) {
-    if (!userData.email || !userData.password)
-      throw new ApiError(400, "Missing required email and password fields");
-
-    const newUser = await this.userRepo.addNew(userData);
-    await this.mailerService.sendMail(userData);
-    return new UserDTO(newUser);
+  async register(prescriptionData:any) {
+   
+    const newPrescription = await this.prescriptionRepo.addNew(prescriptionData);
+    await this.mailerService.sendMail(prescriptionData);
+    return new PrescriptionDTO(newPrescription);
   }
 
-  async login(userData:any) {
-    if (!userData.email || !userData.password)
-      throw new ApiError(400, "Missing required email and password fields");
+ 
 
-    const user = await this.userRepo.findByEmail(userData);
-    if (!user)
-      throw new ApiError(400, "User with the specified email does not exists");
 
-    const passwordMatch = await this.userRepo.compareHash(
-      userData.password,
-      user.password
-    );
-    if (!passwordMatch) throw new ApiError(400, "User password do not match");
-
-    return new UserDTO(user);
-  }
-
-  async findByEmail(userData:any) {
-    return await this.userRepo.findByEmail(new UserDTO(userData));
-  }
-
-  async findById(id:any) {
-    return await this.userRepo.findOne(id);
-  }
-
-  async getOne(userData:any): Promise<UserDTO> {
-    const user = await this.userRepo.findOne(userData);
-    if (!user) {
+  async getOne(prescriptionData:any): Promise<PrescriptionDTO> {
+    const prescription = await this.prescriptionRepo.findOne(prescriptionData);
+    if (!prescription) {
       //throw new ApiError("Ressource not exists");
     }
-    return new UserDTO(user);
+    return new PrescriptionDTO(prescription);
   }
 
-  async update(userData:any) {
-    const user = await this.getOne(userData);
-    const userUpdated = this.userRepo.update(user);
-    return new UserDTO(userUpdated);
+  async update(prescriptionData:any) {
+    const prescription = await this.getOne(prescriptionData);
+    const prescriptionUpdated = this.prescriptionRepo.update(prescription);
+    return new PrescriptionDTO(prescriptionUpdated);
   }
-  async delete(userData:any) {
-    const user = await this.getOne(userData);
-    const userDeleted = this.userRepo.delete(user);
-    return new UserDTO(userDeleted);
+  async delete(prescriptionData:any) {
+    const prescription = await this.getOne(prescriptionData);
+    const prescriptionDeleted = this.prescriptionRepo.delete(prescription);
+    return new PrescriptionDTO(prescriptionDeleted);
   }
 }
 
-export default UserService;
+export default PrescriptionService;

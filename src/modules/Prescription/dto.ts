@@ -1,18 +1,14 @@
 
 
-class UserDTO {
-	public name: any;
-	public email: any;
-	public password: any;
+class PrescriptionDTO {
+	
   public id:any;
 
-  constructor({id, email,name,password} : {id: number, email: string, name:string,password:string}) {
+  constructor({id} : {id: number}) {
     this.id=id;
-    this.name = name;
-    this.email = email;
-    this.password = password;
+    
     
   }
 }
 
-export default UserDTO;
+export default PrescriptionDTO;

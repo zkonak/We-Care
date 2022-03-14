@@ -1,47 +1,37 @@
 import {EntityRepository, EntityManager} from "typeorm";
 import bcrypt from 'bcrypt';
-import { User } from "./entity";
+import { Prescription } from "./entity";
 
 
-export interface IUserRepository {
-  findAll() : Promise<User[]>
-  addNew(userEntity: any) : Promise<any>
-  findByEmail(userEntity: any) : Promise<User | undefined>
-  compareHash(password: string, hash: string) : Promise<boolean> 
+export interface IPrescriptionRepository {
+  findAll() : Promise<Prescription[]>
+  addNew(prescriptionEntity: any) : Promise<any>
+  
 }
 
 @EntityRepository()
-class UserRepository implements IUserRepository {
+class PrescriptionRepository implements IPrescriptionRepository {
 constructor(private manager: EntityManager) {
   }
 
   async findAll() {
-    return await this.manager.find(User);
+    return await this.manager.find(Prescription);
 }
 
-  async addNew(userEntity:any) {
+  async addNew(prescriptionEntity:any) {
     const salt = bcrypt.genSaltSync(10);
-    userEntity.password = bcrypt.hashSync(userEntity.password, salt);
-    return await this.manager.save(User,userEntity);
+    prescriptionEntity.password = bcrypt.hashSync(prescriptionEntity.password, salt);
+    return await this.manager.save(Prescription,prescriptionEntity);
   }
 
-  async findByEmail(userEntity:any) {
-    return await this.manager.findOne(User,{ where: { email: userEntity.email } });
-  }
-  async findOne(id:any) {
-    return await this.manager.findOne(User,{ where: { id: id } });
+ 
+  async update(prescriptionEntity:any) {
+    //return await this.manager.update(Prescription,prescriptionEntity);
   }
 
-  compareHash = async (password:any, hash:any) =>
-    await bcrypt.compareSync(password, hash);
-
-  async update(userEntity:any) {
-    //return await this.manager.update(User,userEntity);
-  }
-
- async delete(userEntity:any) {
-    //return await this.manager.delete(userEntity);
+ async delete(prescriptionEntity:any) {
+    //return await this.manager.delete(prescriptionEntity);
   }
 }
 
-export default UserRepository;
+export default PrescriptionRepository;
