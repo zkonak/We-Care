@@ -1,6 +1,5 @@
-import { any } from "sequelize/lib/operators";
 import { mailerService } from "../../../../libs";
-import { patient } from "../../entity";
+import { patient, Patient } from "../../entity";
 import PatientService from "../../service";
 import PatientRepositoryMocks from "../mocks/patientRepository.mocks";
 
@@ -9,7 +8,10 @@ const patientService = new PatientService(
   mailerService
 );
 
-const datatest: patient = { email: "machin@gmail.com" };
+const datatest: patient = {
+  email: "machin@gmail.com",
+  password: "test",
+};
 
 describe("patient use case", () => {
   describe("add patient:use case", () => {
@@ -17,6 +19,15 @@ describe("patient use case", () => {
       const result = await patientService.register(datatest);
       expect(result.email).toBe("machin@gmail.com");
     });
+  });
+
+  it("Should throw a error if patientdata is empty or null", async () => {
+    try {
+      await patientService.register({ email: "", password: "" });
+    } catch (e: any) {
+      expect(400);
+      expect(e.message).toBe("Missing required email and password fields");
+    }
   });
 
   describe("find a patient:use case", () => {

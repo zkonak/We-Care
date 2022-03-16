@@ -11,17 +11,6 @@ export interface IConsultationRepository {
 @EntityRepository()
 class ConsultationRepository implements IConsultationRepository {
   constructor(private manager: EntityManager) {}
-  //   async delete(consultation: Consultation): Promise<Consultation | undefined> {
-  //     return await this.manager.delete(consultation);
-  //   }
-  //   async update(
-  //     id: number,
-  //     consultation: Consultation
-  //   ): Promise<Consultation | undefined> {
-  //     return await this.manager.findOne(Consultation, {
-  //       where: { id: id },
-  //     });
-  //   }
 
   async findAll(): Promise<Consultation[]> {
     return await this.manager.find(Consultation);
@@ -33,6 +22,9 @@ class ConsultationRepository implements IConsultationRepository {
     return await this.manager.findOne(Consultation, {
       where: { id: id },
     });
+  }
+  async update(userEntity: any) {
+    //return await this.manager.update(User,userEntity);
   }
 }
 export default ConsultationRepository;

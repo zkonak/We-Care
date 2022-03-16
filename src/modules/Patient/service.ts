@@ -29,8 +29,8 @@ class PatientService implements IPatientService {
   }
 
   async register(patientData: any) {
-    // if (!patientData.email || !patientData.password)
-    //   throw new ApiError(400, "Missing required email and password fields");
+    if (!patientData.email || !patientData.password)
+      throw new ApiError(400, "Missing required email and password fields");
 
     const newPatient = await this.patientRepo.addNew(patientData);
     await this.mailerService.sendMail(patientData);

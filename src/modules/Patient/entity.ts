@@ -1,3 +1,4 @@
+import { Consultation } from "../Consultation/entity";
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -17,8 +18,11 @@ export class Patient extends BaseEntity {
   @Column()
   password: string;
   length: number;
+  //   @ManyToOne(() => Consultation, (consultation) => consultation.patients)
+  //   consultation: Consultation;
 }
 
 export type patient = {
   email: string;
+  password: string;
 };
