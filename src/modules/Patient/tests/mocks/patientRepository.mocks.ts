@@ -1,6 +1,5 @@
-import { patient, Patient } from "../../../modules/Patient/entity";
-import { IPatientRepository } from "../../../modules/Patient/repository";
-import PatientService from "../../../modules/Patient/service";
+import { patient, Patient } from "../../entity";
+import { IPatientRepository } from "../../repository";
 
 //creer une base de donnée fake
 const patients: Patient[] = [];

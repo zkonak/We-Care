@@ -1,7 +1,7 @@
-import { User } from "../modules/User/entity";
+import { Patient } from "../modules/Patient/entity";
 
 export interface IMailerService {
-  sendMail(user: User): Promise<void>;
+  sendMail(user: Patient): Promise<void>;
 }
 
 class MailerService implements IMailerService {
@@ -10,7 +10,7 @@ class MailerService implements IMailerService {
     this.nodemailer = nodemailer;
   }
 
-  async sendMail(user: User) {
+  async sendMail(user: Patient) {
     try {
       // Generate test SMTP service account from ethereal.email
       // Only needed if you don't have a real mail account for testing

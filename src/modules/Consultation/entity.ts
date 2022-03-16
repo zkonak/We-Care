@@ -8,7 +8,6 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 import { Patient } from "../Patient/entity";
-import { User } from "../User/entity";
 
 @Entity()
 export class Consultation extends BaseEntity {

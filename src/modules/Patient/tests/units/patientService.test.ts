@@ -1,7 +1,7 @@
 import { any } from "sequelize/lib/operators";
-import { mailerService } from "../../../libs";
-import { Patient, patient } from "../../../modules/Patient/entity";
-import PatientService from "../../../modules/Patient/service";
+import { mailerService } from "../../../../libs";
+import { patient } from "../../entity";
+import PatientService from "../../service";
 import PatientRepositoryMocks from "../mocks/patientRepository.mocks";
 
 const patientService = new PatientService(
