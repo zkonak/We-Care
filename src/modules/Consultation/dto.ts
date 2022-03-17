@@ -2,20 +2,33 @@ import { Patient } from "../Patient/entity";
 
 class ConsultationDtO {
   public id: number;
-  //   id_doctor;
-  //   patients;
+  public date: Date;
+  public hour: string;
+  public valid: boolean;
+  public created_at: Date;
+  public updated_at: Date;
+
   constructor({
     id,
-  }: // id_doctor,
-  // patients,
-  {
+    date,
+    hour,
+    valid,
+    created_at,
+    updated_at,
+  }: {
     id: number;
-    // id_doctor: number;
-    // patients: Patient[];
+    date: Date;
+    hour: string;
+    valid: boolean;
+    created_at: Date;
+    updated_at: Date;
   }) {
     this.id = id;
-    //(this.patients = patients);
-    // (this.id_doctor = id_doctor)
+    this.date = date;
+    this.hour = hour;
+    this.valid = valid;
+    this.created_at = created_at;
+    this.updated_at = updated_at;
   }
 }
 
