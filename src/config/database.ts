@@ -2,8 +2,9 @@ import { getConnectionManager } from "typeorm";
 import { Patient } from "../modules/Patient/entity";
 import { Doctor } from "../modules/Doctor/entity";
 import { Service } from "../modules/Service/entity";
+import { Consultation } from "../modules/Consultation/entity";
 console.log("database connectttt");
-const entities = [Patient, Doctor, Service];
+const entities = [Patient, Doctor, Service, Consultation];
 
 const connectionManager = getConnectionManager();
 
