@@ -25,7 +25,7 @@ describe("patient use case", () => {
     try {
       await patientService.register({ email: "", password: "" });
     } catch (e: any) {
-      expect(400);
+      expect(e.statusCode).toBe(400);
       expect(e.message).toBe("Missing required email and password fields");
     }
   });
