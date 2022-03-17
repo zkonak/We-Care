@@ -16,7 +16,7 @@ jobs:
       TYPEORM_HOST: localhost
       TYPEORM_USERNAME: root
       TYPEORM_PASSWORD: root
-      TYPEORM_DATABASE: bookstore
+      TYPEORM_DATABASE: we_care
       TYPEORM_PORT: 3306
       TYPEORM_SYNCHRONIZE: true
       TYPEORM_LOGGING: false
@@ -54,4 +54,8 @@ jobs:
 
     - name: Run tests
       run: npm run test
+      
+    - name: Run build
+      run: npm run dev
+    
       
