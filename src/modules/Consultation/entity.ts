@@ -36,6 +36,6 @@ export class Consultation extends BaseEntity {
   //   @OneToMany(() => Patient, (patient) => patient.consultation)
   //   patients: Patient[];
 
-  //     @OneToMany(() => Doctor, (doctor) => doctor.consultation)
-  //    doctor: Doctor[];
+  //   @OneToMany(() => Doctor, (doctor) => doctor.consultation)
+  //  doctor: Doctor[];
 }

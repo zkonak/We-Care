@@ -1,13 +1,8 @@
 import { EntityRepository, EntityManager } from "typeorm";
+import { IConsultationRepository } from "../../helpers/Interfaces/consultation.interfaces";
 import ConsultationDtO from "./dto";
 import { Consultation } from "./entity";
-export interface IConsultationRepository {
-  //   delete(consultation: Consultation): Promise<Consultation | undefined>;
-  //   update(consultation: Consultation): Promise<Consultation | undefined>;
-  findAll(): Promise<Consultation[]>;
-  addConsultation(consultation: Consultation): Promise<Consultation>;
-  findOne(id: number): Promise<Consultation | undefined>;
-}
+
 @EntityRepository()
 class ConsultationRepository implements IConsultationRepository {
   constructor(private manager: EntityManager) {}
@@ -23,8 +18,8 @@ class ConsultationRepository implements IConsultationRepository {
       where: { id: id },
     });
   }
-  async update(userEntity: any) {
-    //return await this.manager.update(User,userEntity);
-  }
+  //   async update(consultationData: Consultation) {
+  // const consultation= await this.manager.update(Consultation,consultationData);
+  //   }
 }
 export default ConsultationRepository;

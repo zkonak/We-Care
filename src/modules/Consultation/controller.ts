@@ -1,11 +1,12 @@
 import { NextFunction, Request, Response } from "express";
 import { Controller, Get, Post } from "@overnightjs/core";
-import ConsultationService from "./service";
-import { IConsultationService } from "./service";
+import { IConsultationService } from "../../helpers/Interfaces/consultation.interfaces";
+
 @Controller("consultations")
 class ConsultationController {
-  private consultationService: any;
-  constructor(ConsultationService: IConsultationService) {
+  consultationService: any;
+
+  constructor(consultationService: IConsultationService) {
     this.consultationService = this.consultationService;
   }
   @Post()
