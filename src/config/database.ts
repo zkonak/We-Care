@@ -3,7 +3,7 @@ import { Patient } from "../modules/Patient/entity";
 import { Doctor } from "../modules/Doctor/entity";
 import { Service } from "../modules/Service/entity";
 import { Consultation } from "../modules/Consultation/entity";
-console.log("database connectttt");
+console.log("database is connected");
 const entities = [Patient, Doctor, Service, Consultation];
 
 const connectionManager = getConnectionManager();
