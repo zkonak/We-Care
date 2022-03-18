@@ -4,13 +4,13 @@ on:
   pull_request:
     types: [review_requested, opened, reopened, synchronize]
     branches:
-    - master
+      - master
 
 jobs:
   test:
     runs-on: ubuntu-latest
     env:
-      APP_PORT: 3050
+      APP_PORT: 3000
       JWT_SECRET: toto000
       TYPEORM_CONNECTION: mysql
       TYPEORM_HOST: localhost
@@ -22,40 +22,38 @@ jobs:
       TYPEORM_LOGGING: false
       TYPEORM_MIGRATIONS_RUN: false
       TYPEORM_ENTITIES: src/modules/**/entity.ts
-    
+
     services:
       mysql:
         image: mysql:5.7
         env:
           MYSQL_ROOT_PASSWORD: root
         ports:
-        - 3306
+          - 3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=5
-    
+
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-      
-    - name: start mysql service
-      run: |
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: start mysql service
+        run: |
           sudo /lib/systemd/systemd-sysv-install enable mysql
           sudo systemctl enable mysql.service
           sudo systemctl start mysql.service
           sudo systemctl status mysql.service
           mysql --host 127.0.0.1 --port 3306 -uroot -proot -e "CREATE DATABASE we_care"
-          
-    - name: Install node
-      uses: actions/setup-node@v2
-      with:
-        node-version: 16.x
-        
-    - name: Install dependencies
-      run: npm install
 
-    - name: Run tests
-      run: npm run test
-      
-    - name: Run build
-      run: npm run dev &
-    
-      
+      - name: Install node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm run test
+
+      - name: Run build
+        run: npm run dev &
