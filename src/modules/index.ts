@@ -22,12 +22,14 @@ import {serviceController} from './Service';
 import {doctorController} from './Doctor';
 import {prescriptionController} from './Prescription';
 import {allergyController} from './Allergy';
+import { drugController } from './Drug';
 const routes = [
     patientController,
     serviceController,
     doctorController,
     prescriptionController,
-    allergyController
+    allergyController,
+    drugController,
   
 ]
 
