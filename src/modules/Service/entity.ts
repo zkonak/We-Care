@@ -13,5 +13,4 @@ export class Service extends BaseEntity {
     @OneToMany(() => Doctor, doctor => doctor.service)
     doctors: Doctor[];
   
-
 }

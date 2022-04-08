@@ -1,13 +1,25 @@
-import ApiError from "../../helpers/ApiError.js";
+
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import JwtService from "../../libs/jwt";
+import { Controller, Middleware, Get, Post, Put, Delete } from '@overnightjs/core'
+import { Response, Request, NextFunction } from "express";
+import DrugService, { IDrugService } from "./service";
+import { auth } from "../../middlewares";
+@Controller('drugs')
+
 
 class DrugController {
 
-  constructor(drugService) {
+  public drugService: any;
+	public jwtService: any;
+
+  constructor(drugService: IDrugService) {
     this.drugService = drugService;
     
   }
 
-  getAll = async ({res, next}) => {
+  getAll = async (req:Request, res:Response, next:NextFunction) => {
     try {
         let drugs = await this.drugService.getAll();
         res.status(200).json(drugs);
@@ -16,7 +28,7 @@ class DrugController {
     }
 }
 
-  add = async (req, res, next) => {
+  add = async (req:Request, res:Response, next:NextFunction) => {
     try {
       const drug = await this.drugService.add({ ...req.body });
       res.status(201).json(drug);
@@ -27,7 +39,7 @@ class DrugController {
 
 
 
-  getOne = async (req, res, next) => {
+  getOne = async (req:Request, res:Response, next:NextFunction) => {
     const id = req.body.id;
     /*const drug = await this.drugService.findOne({
       try {
@@ -39,12 +51,11 @@ class DrugController {
     // if (!drug) {
     //   throw new ApiError("Ressource not exists");
     // }
-
      res.status(201).json(drug);
      */
   }
 
-  update = async (req, res, next, id, data) => {
+  update = async (req:Request, res:Response, next:NextFunction, id:number) => {
     
     /*const drugFound = await this.drugService.findOne({
      
@@ -58,14 +69,13 @@ class DrugController {
     // if (!drugFound) {
     //   throw new ApiError("Ressource not exists");
     // }
-
     // await drugFound.update(data);
     res.status(201).json(drug);
     }
 */
   };
 
-  delete = async (req, res, next, id, data) => {
+  delete = async (req:Request, res:Response, next:NextFunction, id:number) => {
    /* const drugFound = await this.drugService.findOne({
       try {
         const drug = await this.drugService.add({ ...req.body });
@@ -78,9 +88,7 @@ class DrugController {
     // if (!drugFound) {
     //   throw new ApiError("Ressource not exists");
     // }
-
     // await drugFound.delete();
-
     res.status(201).json(drugFound);
   };
   */
