@@ -12,7 +12,7 @@
 //   "/prescription": PrescriptionRouter,
 //   "/consultation": ConsultationRouter,
 //   "/service": ServiceRouter
- 
+
 // };
 
 // export default routes;
@@ -22,12 +22,16 @@ import {serviceController} from './Service';
 import {doctorController} from './Doctor';
 import {prescriptionController} from './Prescription';
 import {allergyController} from './Allergy';
+import {consultationController} from './Consultation';
+import { doctorAvailableController } from './DoctorAvailable';
 const routes = [
     patientController,
     serviceController,
     doctorController,
     prescriptionController,
-    allergyController
+    allergyController,
+    consultationController,
+    doctorAvailableController
   
 ]
 

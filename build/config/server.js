@@ -20,8 +20,8 @@ class App extends core_1.Server {
     }
     initializeMiddlewares(middlewares) {
         for (const key in middlewares) {
-            if (key === 'csrf') {
-                this.app.get('/csrf', middlewares[key], (req, res) => {
+            if (key === "csrf") {
+                this.app.get("/csrf", middlewares[key], (req, res) => {
                     res.status(200).json(req.csrfToken());
                 });
             }

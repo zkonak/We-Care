@@ -15,8 +15,20 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //   "/service": ServiceRouter
 // };
 // export default routes;
-const User_1 = require("./User");
+const Patient_1 = require("./Patient");
+const Service_1 = require("./Service");
+const Doctor_1 = require("./Doctor");
+const Prescription_1 = require("./Prescription");
+const Allergy_1 = require("./Allergy");
+const Consultation_1 = require("./Consultation");
+const DoctorAvailable_1 = require("./DoctorAvailable");
 const routes = [
-    User_1.userController,
+    Patient_1.patientController,
+    Service_1.serviceController,
+    Doctor_1.doctorController,
+    Prescription_1.prescriptionController,
+    Allergy_1.allergyController,
+    Consultation_1.consultationController,
+    DoctorAvailable_1.doctorAvailableController
 ];
 exports.default = routes;

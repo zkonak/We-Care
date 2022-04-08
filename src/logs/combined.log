@@ -24,6 +24,8 @@
 {"level":"error"}
 {"level":"error"}
 {"level":"error"}
+<<<<<<< HEAD
+=======
 {"level":"error"}
 {"level":"error"}
 {"level":"error"}
@@ -81,6 +83,7 @@
 {"level":"info","message":"::1 - - [14/Mar/2022:13:42:20 +0000] \"POST /prescriptions HTTP/1.1\" 400 73 \"-\" \"PostmanRuntime/7.28.4\"\n"}
 {"level":"error","message":"Error: data and salt arguments required\n    at Object.hashSync (/Users/zelihaozsiray/Desktop/formation/projets/We-Care/node_modules/bcrypt/bcrypt.js:91:15)\n    at PrescriptionRepository.<anonymous> (/Users/zelihaozsiray/Desktop/formation/projets/We-Care/src/modules/Prescription/repository.ts:23:42)\n    at Generator.next (<anonymous>)\n    at /Users/zelihaozsiray/Desktop/formation/projets/We-Care/src/modules/Prescription/repository.ts:17:71\n    at new Promise (<anonymous>)\n    at __awaiter (/Users/zelihaozsiray/Desktop/formation/projets/We-Care/src/modules/Prescription/repository.ts:13:12)\n    at PrescriptionRepository.addNew (/Users/zelihaozsiray/Desktop/formation/projets/We-Care/src/modules/Prescription/repository.ts:37:16)\n    at PrescriptionService.<anonymous> (/Users/zelihaozsiray/Desktop/formation/projets/We-Care/src/modules/Prescription/service.ts:36:57)\n    at Generator.next (<anonymous>)\n    at /Users/zelihaozsiray/Desktop/formation/projets/We-Care/src/modules/Prescription/service.ts:8:71"}
 {"level":"info","message":"::1 - - [14/Mar/2022:13:42:47 +0000] \"POST /prescriptions HTTP/1.1\" 500 63 \"-\" \"PostmanRuntime/7.28.4\"\n"}
+<<<<<<< HEAD
 {"level":"error"}
 {"level":"info","message":"::1 - - [14/Mar/2022:14:26:33 +0000] \"GET /allergy HTTP/1.1\" 404 146 \"-\" \"PostmanRuntime/7.28.4\"\n"}
 {"level":"info","message":"::1 - - [14/Mar/2022:14:26:39 +0000] \"POST /allergy HTTP/1.1\" 404 147 \"-\" \"PostmanRuntime/7.28.4\"\n"}
@@ -103,3 +106,19 @@
 {"level":"info","message":"::1 - - [14/Mar/2022:15:26:37 +0000] \"POST /allergy HTTP/1.1\" 201 27 \"-\" \"PostmanRuntime/7.28.4\"\n"}
 {"level":"info","message":"::1 - - [14/Mar/2022:15:26:46 +0000] \"GET /allergy HTTP/1.1\" 201 27 \"-\" \"PostmanRuntime/7.28.4\"\n"}
 {"level":"info","message":"::1 - - [14/Mar/2022:15:27:22 +0000] \"GET /allergy HTTP/1.1\" 201 27 \"-\" \"PostmanRuntime/7.28.4\"\n"}
+=======
+>>>>>>> ed4b0cc18b6d68a799e5e59a7ced185a9cd16b74
+{"level":"info","message":"::ffff:127.0.0.1 - - [16/Mar/2022:11:11:09 +0000] \"POST /users HTTP/1.1\" 404 145 \"-\" \"-\"\n"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [16/Mar/2022:11:33:35 +0000] \"POST /users HTTP/1.1\" 404 145 \"-\" \"-\"\n"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [16/Mar/2022:11:36:20 +0000] \"POST /users HTTP/1.1\" 404 145 \"-\" \"-\"\n"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [16/Mar/2022:11:37:28 +0000] \"POST /users HTTP/1.1\" 404 145 \"-\" \"-\"\n"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [16/Mar/2022:11:39:27 +0000] \"POST /users HTTP/1.1\" 404 145 \"-\" \"-\"\n"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [16/Mar/2022:11:41:29 +0000] \"POST /users HTTP/1.1\" 404 145 \"-\" \"-\"\n"}
+{"level":"info","message":"::1 - - [16/Mar/2022:11:49:29 +0000] \"POST /users HTTP/1.1\" 404 145 \"-\" \"PostmanRuntime/7.29.0\"\n"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [16/Mar/2022:12:00:58 +0000] \"POST / HTTP/1.1\" 404 140 \"-\" \"-\"\n"}
+{"level":"info","message":"::1 - - [16/Mar/2022:12:01:18 +0000] \"POST /patients HTTP/1.1\" 201 103 \"-\" \"PostmanRuntime/7.29.0\"\n"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [16/Mar/2022:12:02:12 +0000] \"POST /patients HTTP/1.1\" 201 100 \"-\" \"-\"\n"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [16/Mar/2022:12:03:02 +0000] \"POST /patients HTTP/1.1\" 201 103 \"-\" \"-\"\n"}
+>>>>>>> 78f30e1df1c7f03bcdb962285f29565eeaaa3476
+{"level":"error"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [18/Mar/2022:14:55:05 +0000] \"POST /patients HTTP/1.1\" 201 103 \"-\" \"-\"\n"}
