@@ -33,8 +33,8 @@ export class Consultation extends BaseEntity {
   })
   public updated_at: Date;
 
-  //   @OneToMany(() => Patient, (patient) => patient.consultation)
-  //   patients: Patient[];
+  @OneToMany(() => Patient, (patient) => patient.consultation)
+  patients: Patient[];
 
   //   @OneToMany(() => Doctor, (doctor) => doctor.consultation)
   //  doctor: Doctor[];
