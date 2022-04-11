@@ -1,5 +1,6 @@
-import { Response } from "express";
+import express, { Response } from "express";
 import { Request } from "express";
+import bodyParser from "body-parser";
 
 import { Server } from "@overnightjs/core";
 import { handleError } from "../helpers/ApiError";
@@ -29,6 +30,12 @@ class App extends Server {
 
   initializeErrorHandler() {
     this.app.use(handleError);
+    
+    this.app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+    this.app.use(bodyParser.json())
+   
   }
 
   listen(port: any) {

@@ -4,8 +4,10 @@ import {
   PrimaryGeneratedColumn,
   Column,
   ManyToOne,
+  OneToMany,
   BaseEntity,
 } from "typeorm";
+import { PatientDocument } from "../PatientDocument/entity";
 
 @Entity()
 export class Patient extends BaseEntity {
@@ -20,6 +22,11 @@ export class Patient extends BaseEntity {
   length: number;
   //   @ManyToOne(() => Consultation, (consultation) => consultation.patients)
   //   consultation: Consultation;
+
+  @OneToMany(() => PatientDocument, patientDocument => patientDocument.patient)
+  patientDocuments: PatientDocument[];
+ 
+
 }
 
 export type patient = {

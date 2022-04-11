@@ -57,7 +57,7 @@ class ServiceService implements IServiceService {
   }
 
   async update(serviceData:any) {
-    const service = await this.getOne(serviceData);
+    const service = await this.getOne(serviceData.id);
     const serviceUpdated = this.serviceRepo.update(service);
     return new ServiceDTO(serviceUpdated);
   }

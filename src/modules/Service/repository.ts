@@ -23,12 +23,12 @@ class ServiceRepository implements IServiceRepository {
     return await this.manager.findOne(Service, { where: { id: id } });
   }
 
-  async update(userEntity: any) {
-    //return await this.manager.update(User,userEntity);
+  async update(serviceObject: any) {
+    return await this.manager.update(Service,serviceObject.id,{...serviceObject});
   }
 
-  async delete(userEntity: any) {
-    //return await this.manager.delete(userEntity);
+  async delete(serviceObject: any) {
+    return await this.manager.delete(Service,serviceObject.id);
   }
 }
 

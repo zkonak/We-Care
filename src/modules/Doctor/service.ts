@@ -54,7 +54,7 @@ class DoctorService implements IDoctorService {
       doctorData.password,
       doctor.password
     );
-    if (!passwordMatch) throw new ApiError(400, "Doctor password do not match");
+    if (!passwordMatch) throw new ApiError(400, "Doctor password does not match");
 
     return new DoctorDTO(doctor);
   }
@@ -68,7 +68,7 @@ class DoctorService implements IDoctorService {
   }
 
   async getOne(doctorData:any): Promise<DoctorDTO> {
-    const doctor = await this.doctorRepo.findOne(doctorData);
+    const doctor = await this.doctorRepo.findOne(doctorData.id);
     if (!doctor) {
       //throw new ApiError("Ressource not exists");
     }
@@ -76,9 +76,11 @@ class DoctorService implements IDoctorService {
   }
 
   async update(doctorData:any) {
+    
     const doctor = await this.getOne(doctorData);
-    const doctorUpdated = this.doctorRepo.update(doctor);
-    return new DoctorDTO(doctorUpdated);
+    const doctorUpdated = await this.doctorRepo.update(doctorData);
+    console.log(doctorUpdated)
+    return  new DoctorDTO(doctorUpdated);
   }
   async delete(doctorData:any) {
     const doctor = await this.getOne(doctorData);
