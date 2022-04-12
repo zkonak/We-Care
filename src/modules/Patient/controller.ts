@@ -36,10 +36,7 @@ class PatientController {
   @Post()
   add = async (req:Request, res:Response, next:NextFunction) => {
     try {
-      // const salt = bcrypt.genSaltSync(10);
-      // const patientData = req.body;
-      // patientData.password = bcrypt.hashSync(req.body.password, salt);
-      //const patient = await this.#models.Patient.create({ ...patientData });
+     
       const patient = await this.patientService.register({ ...req.body });
       res.status(201).json(patient);
     } catch (err) {
