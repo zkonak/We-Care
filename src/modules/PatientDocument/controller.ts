@@ -4,6 +4,17 @@ import { Controller, Middleware, Get, Post, Put, Delete } from '@overnightjs/cor
 import { Response, Request, NextFunction } from "express";
 import { IPatientDocumentService } from "./service";
 import { auth } from "../../middlewares";
+import multer from "multer";
+
+var storage = multer.diskStorage({   
+  destination: function(req, file, cb) { 
+     cb(null, './uploads');    
+  }, 
+  filename: function (req, file, cb) { 
+     cb(null , file.originalname);   
+  }
+});
+var upload = multer({ storage: storage }).single("document");
 @Controller('patientDocuments')
 class PatientDocumentController {
 	public patientDocumentService: any;
@@ -19,9 +30,19 @@ class PatientDocumentController {
   @Post()
   add = async (req:Request, res:Response, next:NextFunction) => {
     try {
-      console.log("doccc",req.body.file);
-       const patientDocument = await this.patientDocumentService.register({ ...req.body });
-      res.status(201).json(patientDocument);
+      let document:any={};
+      upload(req, res,async (err) => {
+        if(err) {
+          res.status(400).send("Something went wrong!");
+        }
+         document=req.file;
+     
+       
+      req.body.document=document.filename;
+      
+      const patientDocument = await this.patientDocumentService.register({ ...req.body });
+       res.status(201).json(patientDocument);
+      });
     } catch (err) {
       next(err);
     }
@@ -52,8 +73,15 @@ class PatientDocumentController {
   @Delete()
   delete = async (req:Request, res:Response, next:NextFunction) => {
     try {
-      const patientDocument = await this.patientDocumentService.delete({ ...req.body });
 
+      
+      const patientDocument = await this.patientDocumentService.delete({ ...req.body });
+     
+
+      // Delete the file like normal
+      
+  
+     
       res.status(201).json(patientDocument);
     } catch (err) {
       next(err);

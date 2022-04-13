@@ -67,9 +67,9 @@ class PatientService implements IPatientService {
   }
 
   async getOne(patientData: any): Promise<PatientDTO> {
-    const patient = await this.patientRepo.findOne(patientData);
+    const patient = await this.patientRepo.findOne(patientData.id);
     if (!patient) {
-      //throw new ApiError("Ressource not exists");
+     // throw new ApiError("Ressource not exists");
     }
     return new PatientDTO(patient);
   }

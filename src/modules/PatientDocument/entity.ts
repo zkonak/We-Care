@@ -12,7 +12,7 @@ export class PatientDocument extends BaseEntity {
     patient: Patient;
 
     @Column()
-    document:"longblob";
+    document:String;
 
    
 

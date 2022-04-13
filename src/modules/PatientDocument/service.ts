@@ -1,7 +1,7 @@
 import PatientDocumentDTO from "./dto";
 import { IPatientDocumentRepository } from "./repository";
 import { ApiError } from "../../helpers/ApiError";
-
+import fs from "fs";
 
 
 
@@ -32,7 +32,8 @@ class PatientDocumentService implements IPatientDocumentService {
   }
 
   async register(patientDocumentData:any) {
-   
+    
+    
     const newPatientDocument = await this.patientDocumentRepo.addNew(patientDocumentData);
     
     return new PatientDocumentDTO(newPatientDocument);
@@ -42,9 +43,9 @@ class PatientDocumentService implements IPatientDocumentService {
 
 
   async getOne(patientDocumentData:any): Promise<PatientDocumentDTO> {
-    const patientDocument = await this.patientDocumentRepo.findOne(patientDocumentData);
+    const patientDocument = await this.patientDocumentRepo.findOne(patientDocumentData.id);
     if (!patientDocument) {
-      //throw new ApiError("Ressource not exists");
+      throw new ApiError(500,"Ressource not exists");
     }
     return new PatientDocumentDTO(patientDocument);
   }
@@ -56,6 +57,16 @@ class PatientDocumentService implements IPatientDocumentService {
   }
   async delete(patientDocumentData:any) {
     const patientDocument = await this.getOne(patientDocumentData);
+    const path = './uploads/'+patientDocument.document;
+
+      fs.unlink(path, (err) => {
+        if (err) {
+          console.error(err)
+          return
+        }
+      
+        //file removed
+      })
     const patientDocumentDeleted = await this.patientDocumentRepo.delete(patientDocument);
     return new PatientDocumentDTO(patientDocumentDeleted);
   }

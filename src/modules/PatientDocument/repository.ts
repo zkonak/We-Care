@@ -32,7 +32,7 @@ constructor(private manager: EntityManager) {
   }
 
  async delete(patientDocumentEntity:any) {
-    //return await this.manager.delete(patientDocumentEntity);
+  return await this.manager.delete(PatientDocument,patientDocumentEntity.id);
   }
 }
 
