@@ -13,14 +13,14 @@ class ConsultationService implements IConsultationService {
   constructor(consultationRepository: IConsultationRepository) {
     this.consultationRepository = consultationRepository;
   }
-  async delete(consultationId: number): Promise<string> {
+  async delete(consultationData: Consultation): Promise<string> {
     // const consultation = await this.consultationRepository.findOne(
     //   consultationId
     // );
     // if (!consultation) {
     //   throw new Error("consultation introuvable ou déjà supprimée.");
     // }
-    return await this.consultationRepository.delete(consultationId);
+    return await this.consultationRepository.delete(consultationData);
   }
   async getOne(
     consultationData: Consultation

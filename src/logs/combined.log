@@ -300,3 +300,11 @@
 {"level":"info","message":"::1 - - [13/Apr/2022:11:52:04 +0000] \"DELETE /consultations/%0A HTTP/1.1\" 201 45 \"-\" \"PostmanRuntime/7.29.0\"\n"}
 {"level":"info","message":"::1 - - [13/Apr/2022:11:55:34 +0000] \"DELETE /consultations/%0A HTTP/1.1\" - - \"-\" \"PostmanRuntime/7.29.0\"\n"}
 {"level":"info","message":"::1 - - [13/Apr/2022:11:56:02 +0000] \"DELETE /consultations/%0A HTTP/1.1\" 201 45 \"-\" \"PostmanRuntime/7.29.0\"\n"}
+{"level":"info","message":"::1 - - [13/Apr/2022:12:00:44 +0000] \"POST /consultations/ HTTP/1.1\" 201 54 \"-\" \"PostmanRuntime/7.29.0\"\n"}
+{"level":"info","message":"::1 - - [13/Apr/2022:12:00:55 +0000] \"DELETE /consultations/%0A HTTP/1.1\" 201 31 \"-\" \"PostmanRuntime/7.29.0\"\n"}
+{"level":"info","message":"::1 - - [13/Apr/2022:12:01:37 +0000] \"POST /consultations/ HTTP/1.1\" 201 54 \"-\" \"PostmanRuntime/7.29.0\"\n"}
+{"level":"info","message":"::1 - - [13/Apr/2022:12:01:52 +0000] \"GET /consultations/ HTTP/1.1\" 201 70 \"-\" \"PostmanRuntime/7.29.0\"\n"}
+{"level":"info","message":"::1 - - [13/Apr/2022:12:02:00 +0000] \"GET /doctors/%0A HTTP/1.1\" 404 150 \"-\" \"PostmanRuntime/7.29.0\"\n"}
+{"level":"info","message":"::1 - - [13/Apr/2022:12:02:25 +0000] \"GET /consultations/%0A HTTP/1.1\" 201 - \"-\" \"PostmanRuntime/7.29.0\"\n"}
+{"level":"info","message":"::1 - - [13/Apr/2022:12:02:34 +0000] \"POST /consultations/ HTTP/1.1\" 201 55 \"-\" \"PostmanRuntime/7.29.0\"\n"}
+{"level":"info","message":"::1 - - [13/Apr/2022:12:02:43 +0000] \"DELETE /consultations/%0A HTTP/1.1\" 201 31 \"-\" \"PostmanRuntime/7.29.0\"\n"}

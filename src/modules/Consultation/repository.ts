@@ -7,9 +7,9 @@ import { Consultation } from "./entity";
 class ConsultationRepository implements IConsultationRepository {
   constructor(private manager: EntityManager) {}
 
-  async delete(consultationId: number): Promise<string> {
-    await this.manager.delete(Consultation, consultationId);
-    return `Consultation n°${consultationId} supprimée.`;
+  async delete(consultationData: Consultation): Promise<string> {
+    await this.manager.delete(Consultation, consultationData);
+    return `Consultation n°${consultationData.id} supprimée.`;
   }
 
   async findOne(id: any) {
