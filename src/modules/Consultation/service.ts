@@ -1,7 +1,6 @@
 import ConsultationDtO from "./dto";
 import { ApiError } from "../../helpers/ApiError";
 import { Consultation } from "./entity";
-import { NextFunction, Request, Response } from "express";
 import {
   IConsultationRepository,
   IConsultationService,
@@ -14,24 +13,42 @@ class ConsultationService implements IConsultationService {
   constructor(consultationRepository: IConsultationRepository) {
     this.consultationRepository = consultationRepository;
   }
+  async delete(consultationId: number): Promise<string> {
+    // const consultation = await this.consultationRepository.findOne(
+    //   consultationId
+    // );
+    // if (!consultation) {
+    //   throw new Error("consultation introuvable ou déjà supprimée.");
+    // }
+    return await this.consultationRepository.delete(consultationId);
+  }
+  async getOne(
+    consultationData: Consultation
+  ): Promise<Consultation | undefined> {
+    const consultation = await this.consultationRepository.findOne(
+      consultationData
+    );
+    return consultation;
+  }
 
-  ////////
+  async getAllByDoctor(id: any): Promise<Consultation[]> {
+    const consultations = await this.consultationRepository.getAllConsultation(
+      id
+    );
+    return consultations.map(
+      (consultation: Consultation) => new Consultation()
+    );
+  }
+  update(consultationEntity: Consultation): Promise<Consultation> {
+    throw new Error("Method not implemented.");
+  }
+
   async getAll() {
     const consultations = await this.consultationRepository.findAll();
-    return consultations.map(
-      (consultation: any) => new ConsultationDtO(consultation)
-    );
-  }
-  //////////
-  async getOne(consultationData: Consultation): Promise<ConsultationDtO> {
-    const consultation = await this.consultationRepository.findOne(
-      consultationData.id
-    );
-    return new this.consultation(ConsultationDtO);
+    return consultations;
   }
 
-  ////////
-  async add(consultationData: Consultation) {
+  async register(consultationData: Consultation) {
     if (!ConsultationDtO) {
       throw new ApiError(400, "consultation validation failed");
     }
@@ -41,23 +58,6 @@ class ConsultationService implements IConsultationService {
 
     return dataConsultation;
   }
-
-  //////
-  //   async update(consultationData: Consultation) {
-  //     const consultationdd = await this.getOne(consultationData);
-  //     const consultationUpdated = await this.consultationRepository.update(
-  //       this.consultation
-  //     );
-  //     return new ConsultationDtO(consultationUpdated);
-  //   }
-
-  ///////
-  //   async delete(consultationData: Consultation) {
-  //     const consultation = await this.getOne(consultationData);
-  //     const consultationDeleted =
-  //       this.consultationRepository.delete(consultation);
-  //     return new ConsultationDtO(consultationDeleted);
-  //   }
 }
 
 export default ConsultationService;

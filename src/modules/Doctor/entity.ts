@@ -1,18 +1,26 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, BaseEntity } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  BaseEntity,
+} from "typeorm";
+import { Consultation } from "../Consultation/entity";
 import { Service } from "../Service/entity";
+import { OneToMany } from "typeorm";
 
 @Entity()
 export class Doctor extends BaseEntity {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @PrimaryGeneratedColumn()
-    id: number;
+  @Column()
+  email: string;
 
-    @Column()
-    email: string;
-
-    @Column()
-    password: string;
-    @ManyToOne(() => Service, service => service.doctors)
-    service: Service
-
+  @Column()
+  password: string;
+  @ManyToOne(() => Service, (service) => service.doctors)
+  service: Service;
+  @OneToMany(() => Consultation, (consultation) => consultation.doctor)
+  consultations: Consultation[];
 }

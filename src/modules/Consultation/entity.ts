@@ -7,10 +7,15 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
 } from "typeorm";
+import { Doctor } from "../Doctor/entity";
 import { Patient } from "../Patient/entity";
+import { ManyToOne } from "typeorm";
 
 @Entity()
 export class Consultation extends BaseEntity {
+  map(arg0: (consultation: any) => Consultation) {
+    throw new Error("Method not implemented.");
+  }
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -21,21 +26,10 @@ export class Consultation extends BaseEntity {
   hour: string;
   @Column()
   valid: boolean;
-  @CreateDateColumn({
-    type: "timestamp",
-    default: () => "CURRENT_TIMESTAMP(6)",
-  })
-  public created_at: Date;
-  @UpdateDateColumn({
-    type: "timestamp",
-    default: () => "CURRENT_TIMESTAMP(6)",
-    onUpdate: "CURRENT_TIMESTAMP(6)",
-  })
-  public updated_at: Date;
 
-  @OneToMany(() => Patient, (patient) => patient.consultation)
-  patients: Patient[];
+  @ManyToOne(() => Patient, (patient) => patient.consultations)
+  patient: Patient;
 
-  //   @OneToMany(() => Doctor, (doctor) => doctor.consultation)
-  //  doctor: Doctor[];
+  @ManyToOne(() => Doctor, (doctor) => doctor.consultations)
+  doctor: Doctor;
 }

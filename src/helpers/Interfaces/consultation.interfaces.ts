@@ -2,17 +2,18 @@ import ConsultationDtO from "../../modules/Consultation/dto";
 import { Consultation } from "../../modules/Consultation/entity";
 
 export interface IConsultationService {
-  getAll(): Promise<ConsultationDtO[]>;
-  getOne(consultationData: Consultation): Promise<ConsultationDtO>;
-  add(consultationData: Consultation): Promise<ConsultationDtO>;
-  //update(consultationEntity: Consultation): Promise<ConsultationDtO>;
-  //   delete(consultationData: Consultation): Promise<ConsultationDtO>;
+  getOne(consultationData: Consultation): Promise<Consultation | undefined>;
+  register(consultationData: Consultation): Promise<Consultation>;
+  getAll(): Promise<Consultation[]>;
+  update(consultationData: Consultation): Promise<Consultation>;
+  delete(consultationId: number): Promise<string>;
 }
 
 export interface IConsultationRepository {
-  //   delete(consultation: Consultation): Promise<Consultation | undefined>;
-  //  update(consultation: Consultation): Promise<Consultation>;
+  findOne(id: any): Promise<Consultation | undefined>;
+  getAllConsultation(id: number): Promise<Consultation[]>; //getByDoctor
+  delete(consultationId: number): Promise<string>;
+  update(consultation: Consultation): Promise<Consultation>;
   findAll(): Promise<Consultation[]>;
   addConsultation(consultation: Consultation): Promise<Consultation>;
-  findOne(id: number): Promise<Consultation | undefined>;
 }
