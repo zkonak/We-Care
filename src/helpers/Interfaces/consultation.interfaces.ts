@@ -13,7 +13,7 @@ export interface IConsultationRepository {
   findOne(id: any): Promise<Consultation | undefined>;
   getAllConsultation(id: number): Promise<Consultation[]>; //getByDoctor
   delete(consultationData: Consultation): Promise<string>;
-  update(consultation: Consultation): Promise<Consultation>;
+  update(consultation: Consultation): any;
   findAll(): Promise<Consultation[]>;
   addConsultation(consultation: Consultation): Promise<Consultation>;
 }

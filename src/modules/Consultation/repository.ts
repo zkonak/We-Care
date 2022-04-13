@@ -12,7 +12,7 @@ class ConsultationRepository implements IConsultationRepository {
     return `Consultation n°${consultationData.id} supprimée.`;
   }
 
-  async findOne(id: any) {
+  async findOne(id: number) {
     return await this.manager.findOne(Consultation, { where: { id: id } });
   }
 
@@ -22,11 +22,14 @@ class ConsultationRepository implements IConsultationRepository {
   async findAll(): Promise<Consultation[]> {
     return await this.manager.find(Consultation);
   }
-  async getAllConsultation(doctorId: number): Promise<Consultation[]> {
-    throw new Error("Method not implemented.");
+
+  async update(consultation: Partial<Consultation>) {
+    return await this.manager.update(Consultation, consultation.id, {
+      ...consultation,
+    });
   }
 
-  update(consultation: Consultation): Promise<Consultation> {
+  async getAllConsultation(doctorId: number): Promise<Consultation[]> {
     throw new Error("Method not implemented.");
   }
 }
