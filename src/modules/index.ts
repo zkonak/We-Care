@@ -12,29 +12,30 @@
 //   "/prescription": PrescriptionRouter,
 //   "/consultation": ConsultationRouter,
 //   "/service": ServiceRouter
- 
+
 // };
 
 // export default routes;
 
-import {patientController} from './Patient';
-import {serviceController} from './Service';
-import {doctorController} from './Doctor';
-import {prescriptionController} from './Prescription';
-import {allergyController} from './Allergy';
-import { drugController } from './Drug';
-import { doctorAvailableController } from './DoctorAvailable';
-import { patientDocumentController } from './PatientDocument';
+import { patientController } from "./Patient";
+import { serviceController } from "./Service";
+import { doctorController } from "./Doctor";
+import { prescriptionController } from "./Prescription";
+import { allergyController } from "./Allergy";
+import { drugController } from "./Drug";
+import { doctorAvailableController } from "./DoctorAvailable";
+import { patientDocumentController } from "./PatientDocument";
+import { consultationController } from "./Consultation";
 const routes = [
-    patientController,
-    serviceController,
-    doctorController,
-    prescriptionController,
-    allergyController,
-    drugController,
-    doctorAvailableController,
-    patientDocumentController
-  
-]
+  patientController,
+  serviceController,
+  doctorController,
+  prescriptionController,
+  allergyController,
+  drugController,
+  doctorAvailableController,
+  patientDocumentController,
+  consultationController,
+];
 
 export default routes;

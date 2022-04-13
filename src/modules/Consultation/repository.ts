@@ -7,19 +7,27 @@ import { Consultation } from "./entity";
 class ConsultationRepository implements IConsultationRepository {
   constructor(private manager: EntityManager) {}
 
+  async delete(consultationData: Consultation): Promise<string> {
+    await this.manager.delete(Consultation, consultationData);
+    return `Consultation n°${consultationData.id} supprimée.`;
+  }
+
+  async findOne(id: any) {
+    return await this.manager.findOne(Consultation, { where: { id: id } });
+  }
+
+  async addConsultation(consultation: Consultation): Promise<Consultation> {
+    return await this.manager.save(Consultation, consultation);
+  }
   async findAll(): Promise<Consultation[]> {
     return await this.manager.find(Consultation);
   }
-  async addConsultation(consultation: Consultation): Promise<Consultation> {
-    return await this.manager.save(consultation);
+  async getAllConsultation(doctorId: number): Promise<Consultation[]> {
+    throw new Error("Method not implemented.");
   }
-  async findOne(id: number) {
-    return await this.manager.findOne(Consultation, {
-      where: { id: id },
-    });
+
+  update(consultation: Consultation): Promise<Consultation> {
+    throw new Error("Method not implemented.");
   }
-  //   async update(consultationData: Consultation) {
-  // const consultation= await this.manager.update(Consultation,consultationData);
-  //   }
 }
 export default ConsultationRepository;

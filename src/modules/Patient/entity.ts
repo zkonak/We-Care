@@ -13,20 +13,22 @@ import { PatientDocument } from "../PatientDocument/entity";
 export class Patient extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
-
+  @Column()
+  name: string;
   @Column()
   email: string;
 
   @Column()
   password: string;
   length: number;
-  //   @ManyToOne(() => Consultation, (consultation) => consultation.patients)
-  //   consultation: Consultation;
+  @OneToMany(() => Consultation, (consultation) => consultation.patient)
+  consultations: Consultation[];
 
-  @OneToMany(() => PatientDocument, patientDocument => patientDocument.patient)
+  @OneToMany(
+    () => PatientDocument,
+    (patientDocument) => patientDocument.patient
+  )
   patientDocuments: PatientDocument[];
- 
-
 }
 
 export type patient = {
