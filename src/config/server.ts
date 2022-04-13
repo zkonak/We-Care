@@ -1,6 +1,5 @@
-import { Response } from "express";
+import express, { Response } from "express";
 import { Request } from "express";
-
 import { Server } from "@overnightjs/core";
 import { handleError } from "../helpers/ApiError";
 
@@ -29,6 +28,8 @@ class App extends Server {
 
   initializeErrorHandler() {
     this.app.use(handleError);
+   
+    
   }
 
   listen(port: any) {

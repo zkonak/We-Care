@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, BaseEntity } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne,OneToMany ,BaseEntity } from "typeorm";
+import { DoctorAvailable } from "../DoctorAvailable/entity";
 import { Service } from "../Service/entity";
 
 @Entity()
@@ -14,5 +15,9 @@ export class Doctor extends BaseEntity {
     password: string;
     @ManyToOne(() => Service, service => service.doctors)
     service: Service
+
+    @OneToMany(() => DoctorAvailable, doctorAvailable => doctorAvailable.doctor)
+    doctorAvailables: DoctorAvailable[];
+   
 
 }
