@@ -22,12 +22,13 @@ class ConsultationService implements IConsultationService {
     // }
     return await this.consultationRepository.delete(consultationData);
   }
-  async getOne(
-    consultationData: Consultation
-  ): Promise<Consultation | undefined> {
+  async getOne(consultationData: Consultation) {
     const consultation = await this.consultationRepository.findOne(
-      consultationData
+      consultationData.id
     );
+    if (!consultation) {
+      //throw new ApiError("Ressource not exists");
+    }
     return consultation;
   }
 
@@ -39,8 +40,15 @@ class ConsultationService implements IConsultationService {
       (consultation: Consultation) => new Consultation()
     );
   }
-  update(consultationEntity: Consultation): Promise<Consultation> {
-    throw new Error("Method not implemented.");
+
+  async update(consultationData: Consultation) {
+    const consultation = await this.getOne(consultationData);
+    console.log("consultation", consultation);
+    const consultationUpdated = await this.consultationRepository.update(
+      consultationData
+    );
+    console.log("gggggggggg", consultationUpdated);
+    return consultationUpdated;
   }
 
   async getAll() {
@@ -56,7 +64,7 @@ class ConsultationService implements IConsultationService {
       consultationData
     );
 
-    return dataConsultation;
+    return consultationData;
   }
 }
 
