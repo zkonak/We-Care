@@ -64,7 +64,7 @@ class ConsultationService implements IConsultationService {
       consultationData
     );
 
-    return dataConsultation;
+    return consultationData;
   }
 }
 
