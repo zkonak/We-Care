@@ -43,7 +43,6 @@ class ConsultationService implements IConsultationService {
 
   async update(consultationData: Consultation) {
     const consultation = await this.getOne(consultationData);
-    console.log("consultation", consultation);
     const consultationUpdated = await this.consultationRepository.update(
       consultationData
     );
